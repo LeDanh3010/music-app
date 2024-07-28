@@ -1,21 +1,20 @@
 .navbar {
   width: 317px;
 
-  border: solid 1px red;
+  //   border: solid 1px red;
   border-radius: 8px;
   .nav-icon {
     font-size: 1.6rem;
   }
   .navbar-logo {
-    height: 24px;
-    margin-top: 20px;
-    padding: 0 24px;
-
     a {
       color: #ffff;
       display: flex;
       align-items: center;
       gap: 5px;
+      height: 24px;
+      margin-top: 20px;
+      padding: 0 24px;
     }
     span {
       font-weight: 600;
