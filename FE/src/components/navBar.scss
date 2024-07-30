@@ -1,12 +1,10 @@
-.navbar {
-  width: 317px;
-
-  //   border: solid 1px red;
+.sidebar-nav {
+  width: 340px;
+  background-color: #121212;
   border-radius: 8px;
-  .nav-icon {
-    font-size: 1.6rem;
-  }
+
   .navbar-logo {
+    display: flex;
     a {
       color: #ffff;
       display: flex;
@@ -18,8 +16,11 @@
     }
     span {
       font-weight: 600;
-      font-size: 1.2rem;
+      font-size: 1.8rem;
     }
+  }
+  .nav-icon {
+    font-size: 2.8rem;
   }
   .navbar-header {
     list-style: none;
@@ -36,14 +37,53 @@
       color: #ffff;
       gap: 20px;
       align-items: center;
-      line-height: 48px;
+      height: 100%;
     }
     span {
-      font-weight: 500;
+      font-weight: 600;
+      font-size: 1.6rem;
     }
   }
 }
-// .navbar-logo
-// .navbar-header
-// .navbar-home
-// .navbar-search
+.navbar-header.box2 {
+  display: flex;
+  justify-content: space-between;
+}
+.nav-icon.plus {
+  font-size: 1.8rem;
+  cursor: pointer;
+  margin-right: 15px;
+}
+
+//css create playlist
+.create-playlist-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding: 0 12px;
+  overflow-y: auto;
+  height: 120px;
+  color: #ffff;
+  .create-playlist {
+    min-height: 145px;
+    padding: 16px 20px;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    h4 {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    p {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin: 10px 0 0px;
+    }
+    button {
+      font-size: 1.3rem;
+      font-weight: 700;
+      border-radius: 20px;
+      padding: 8px 16px;
+    }
+  }
+}
