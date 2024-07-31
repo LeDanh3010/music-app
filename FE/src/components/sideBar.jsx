@@ -1,64 +1,73 @@
 import { GoHomeFill } from "react-icons/go";
 import { FaSpotify } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
-import "./navBar.scss";
+import "./sideBar.scss";
 import { VscThreeBars } from "react-icons/vsc";
 import { FaPlus } from "react-icons/fa6";
 import { FaEarthAmericas } from "react-icons/fa6";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
+import "overlayscrollbars/styles/overlayscrollbars.css";
+
 //import React from "react";
-const NavBar = () => {
+const SideBar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-nav">
-        <div className="navbar-logo">
+        <div className="sidebar-logo">
           <a href="#">
-            <FaSpotify className="nav-icon" />
+            <FaSpotify className="sidebar-icon" />
             <span>Spotify</span>
           </a>
         </div>
-        <ul className="navbar-header">
-          <li className="navbar-home">
+        <ul className="sidebar-header">
+          <li className="sidebar-home">
             <a href="#">
-              <GoHomeFill className="nav-icon" />
+              <GoHomeFill className="sidebar-icon" />
               <span>Home</span>
             </a>
           </li>
-          <li className="navbar-search">
+          <li className="sidebar-search">
             <a href="#">
-              <IoIosSearch className="nav-icon" />
+              <IoIosSearch className="sidebar-icon" />
               <span>Search</span>
             </a>
           </li>
         </ul>
       </div>
       <div className="sidebar-nav ">
-        <ul className="navbar-header box2">
-          <li className="navbar-home">
+        <ul className="sidebar-header box2">
+          <li className="sidebar-home">
             <a href="#">
-              <VscThreeBars className="nav-icon" />
+              <VscThreeBars className="sidebar-icon" />
               <span>Your Library</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <FaPlus className="nav-icon plus" />
+              <FaPlus className="sidebar-icon plus" />
             </a>
           </li>
         </ul>
-        <div className="create-playlist-container">
+        <OverlayScrollbarsComponent
+          options={{ scrollbars: { autoHide: "scroll" } }}
+          defer
+          className="create-playlist-container"
+        >
           <div className="create-playlist">
-            <div className="text">
+            <div className="create-playlist-text">
               <h4>Create your first playlist</h4>
               <p>It&apos;s easy, we&apos;ll help you</p>
             </div>
             <button className="create-playlist-btn">Create Playlist</button>
           </div>
           <div className="create-playlist">
-            <h4>Let&apos;s find some podcasts to follow</h4>
-            <p>We&apos;ll keep you updated on new episodes</p>
+            <div className="create-playlist-text">
+              <h4>Let&apos;s find some podcasts to follow</h4>
+              <p>We&apos;ll keep you updated on new episodes</p>
+            </div>
             <button className="create-playlist-btn">Browse podcasts</button>
           </div>
-        </div>
+        </OverlayScrollbarsComponent>
         <div className="sidebar-bottom">
           <div className="info">
             <span>
@@ -84,4 +93,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default SideBar;

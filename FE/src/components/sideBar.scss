@@ -3,7 +3,7 @@
   background-color: #121212;
   border-radius: 8px;
 
-  .navbar-logo {
+  .sidebar-logo {
     display: flex;
     a {
       color: #ffff;
@@ -19,16 +19,16 @@
       font-size: 1.8rem;
     }
   }
-  .nav-icon {
+  .sidebar-icon {
     font-size: 2.8rem;
   }
-  .navbar-header {
+  .sidebar-header {
     list-style: none;
     padding: 8px 12px;
     margin: 0px;
 
-    .navbar-home,
-    .navbar-search {
+    .sidebar-home,
+    .sidebar-search {
       padding: 4px 12px;
       height: 48px;
     }
@@ -45,11 +45,11 @@
     }
   }
 }
-.navbar-header.box2 {
+.sidebar-header.box2 {
   display: flex;
   justify-content: space-between;
 }
-.nav-icon.plus {
+.sidebar-icon.plus {
   font-size: 1.8rem;
   cursor: pointer;
   margin-right: 15px;
@@ -62,14 +62,20 @@
   gap: 20px;
   width: 100%;
   padding: 0 12px;
-  overflow-y: auto;
-  height: 120px;
+  max-height: 120px;
   color: #ffff;
+  .os-scrollbar-handle {
+    background-color: #d3cbcb35;
+  }
   .create-playlist {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 35px;
     min-height: 145px;
     padding: 16px 20px;
     background-color: #1f1f1f;
     border-radius: 8px;
+    margin-bottom: 20px;
     h4 {
       font-size: 1.4rem;
       font-weight: 700;
@@ -80,10 +86,25 @@
       margin: 10px 0 0px;
     }
     button {
+      width: fit-content;
       font-size: 1.3rem;
       font-weight: 700;
       border-radius: 20px;
       padding: 8px 16px;
+      height: auto;
+      line-height: normal;
     }
+  }
+}
+
+//sidebar bottom
+.sidebar-bottom {
+  height: 208px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 80px 1fr 1fr;
+  .info {
+    padding: 0 24px;
+    margin: 32px 0;
   }
 }
