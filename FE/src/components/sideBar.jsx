@@ -58,35 +58,48 @@ const SideBar = () => {
               <h4>Create your first playlist</h4>
               <p>It&apos;s easy, we&apos;ll help you</p>
             </div>
-            <button className="create-playlist-btn">Create Playlist</button>
+            <button className="btn create-playlist-btn">Create Playlist</button>
           </div>
           <div className="create-playlist">
             <div className="create-playlist-text">
               <h4>Let&apos;s find some podcasts to follow</h4>
               <p>We&apos;ll keep you updated on new episodes</p>
             </div>
-            <button className="create-playlist-btn">Browse podcasts</button>
+            <button className="btn create-playlist-btn">Browse podcasts</button>
           </div>
         </OverlayScrollbarsComponent>
-        <div className="sidebar-bottom">
-          <div className="info">
+        <div className="sidebar-footer">
+          <div className="privacy-policy">
+            <div className="privacy-policy-top">
+              <span>
+                <a href="#">Legal</a>
+              </span>
+              <span>
+                <a href="#">Safety & Privacy Center</a>
+              </span>
+              <span>
+                <a href="#">Privacy Policy</a>
+              </span>
+              <span>
+                <a href="#">Cookies</a>
+              </span>
+              <span>
+                <a href="#">About Ads</a>
+              </span>
+              <span>
+                <a href="#">Accessibility</a>
+              </span>
+            </div>
             <span>
-              <a href="#">Legal</a>
-            </span>
-            <span>
-              <a href="#">Legal</a>
-            </span>
-            <span>
-              <a href="#">Legal</a>
-            </span>
-            <span>
-              <a href="#">Legal</a>
+              <a href="#">Cookies</a>
             </span>
           </div>
-          <button>
-            <FaEarthAmericas />
-            English
-          </button>
+          <div className="btn-footer">
+            <button className="btn btn-language">
+              <FaEarthAmericas />
+              <span>English</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

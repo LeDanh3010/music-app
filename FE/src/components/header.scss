@@ -1,0 +1,89 @@
+.header {
+  padding: 8px 16px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.header-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  justify-content: space-between;
+  .header-arrow {
+    display: flex;
+    gap: 8px;
+    .header-arrow_icon {
+      background-color: rgba(0, 0, 0, 0.7);
+
+      border-radius: 50%;
+      border: none;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  .icon {
+    color: #fff;
+    font-size: 2rem;
+  }
+  .header-search {
+    width: 100%;
+    margin-right: auto;
+    background-color: #242424;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    border-radius: 500px;
+    flex: 0 1 364px;
+    padding-left: 15px;
+    gap: 6px;
+    .header-search_icon {
+      color: hsla(0, 0%, 100%, 0.7);
+      padding-top: 6px;
+    }
+    input {
+      font-size: 1.2rem;
+      width: 100%;
+      flex: 0 1 280px;
+      padding: 5px 2px;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: #fff;
+    }
+  }
+  .header-search:focus-within {
+    outline-style: solid; /* Ensures a solid outline on focus */
+    outline-color: #fff; /* Sets the color of the outline */
+    outline-width: 2px; /* Sets the thickness of the outline */
+  }
+  .header-user {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-around;
+    height: 48px;
+
+    a {
+      display: flex;
+      align-items: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      height: 100%;
+    }
+    .signUp {
+      color: #b3b3b3;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .login {
+      color: #000;
+      padding: 8px 32px;
+      background-color: #fff;
+      border-radius: 30px;
+      white-space: nowrap;
+    }
+  }
+}

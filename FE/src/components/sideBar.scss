@@ -1,8 +1,13 @@
+.sidebar {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content;
+  row-gap: 8px;
+}
 .sidebar-nav {
   width: 340px;
   background-color: #121212;
   border-radius: 8px;
-
   .sidebar-logo {
     display: flex;
     a {
@@ -85,26 +90,54 @@
       font-weight: 500;
       margin: 10px 0 0px;
     }
-    button {
+    .create-playlist-btn {
       width: fit-content;
-      font-size: 1.3rem;
-      font-weight: 700;
       border-radius: 20px;
       padding: 8px 16px;
-      height: auto;
-      line-height: normal;
     }
   }
 }
 
+//btn general{
+.btn {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
 //sidebar bottom
-.sidebar-bottom {
-  height: 208px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 80px 1fr 1fr;
-  .info {
+.sidebar-footer {
+  display: flex;
+  flex-direction: column;
+  .privacy-policy {
+    font-size: 1rem;
     padding: 0 24px;
     margin: 32px 0;
+
+    a {
+      color: #b3b3b3;
+      margin-right: 17px;
+      line-height: 28px;
+    }
+  }
+  .privacy-policy-top {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .btn-footer {
+    margin-bottom: 32px;
+    padding: 0 24px;
+
+    .btn-language {
+      display: flex;
+      align-items: center;
+      background-color: transparent;
+      border: 1px solid #7c7c7c;
+      color: #ffff;
+      padding: 8px 15px;
+      border-radius: 25px;
+      span {
+        margin-left: 3px;
+      }
+    }
   }
 }

@@ -49,5 +49,5 @@
   padding: 8px;
   display: grid;
   gap: 8px;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: min-content auto;
 }
