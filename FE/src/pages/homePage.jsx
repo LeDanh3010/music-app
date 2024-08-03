@@ -8,9 +8,7 @@ const HomePage = () => {
     <div className="home-page">
       <Header />
       <main className="home-content">
-        <div className="content-container">
-          <MusicItem />
-        </div>
+        <MusicItem />
       </main>
     </div>
   );

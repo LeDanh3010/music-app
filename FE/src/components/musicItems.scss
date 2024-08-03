@@ -1,0 +1,108 @@
+.content-container {
+  padding: 0 16px;
+  height: 500px;
+  .os-scrollbar-handle {
+    background-color: #d3cbcb35;
+  }
+}
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row;
+  padding-top: 8px;
+  height: 60px;
+  h1 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    a {
+      color: #fff;
+    }
+  }
+  span {
+    font-size: 1.2rem;
+
+    font-weight: 700;
+    a {
+      color: #b3b3b3;
+    }
+  }
+}
+.items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  li {
+    list-style: none;
+    border-radius: 8px;
+    position: relative;
+    .play-icon {
+      display: flex;
+      position: absolute;
+      top: calc(100% - 129.2px);
+      left: calc(100% - 70.8px);
+      font-size: 3.5rem;
+      color: #1f1f1f;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      .icon-custom {
+        z-index: 1;
+        transform: translateY(0);
+      }
+    }
+    .play-icon::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: scale(0.8);
+      background-color: rgb(16, 219, 16);
+      border-radius: 50%;
+    }
+    a {
+      display: grid;
+      grid-template-rows: repeat(2, auto);
+      gap: 8px;
+      padding: 12px;
+    }
+    &:hover {
+      background-color: #1f1f1f;
+      .play-icon {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  }
+
+  .items-img {
+    width: 100%;
+    height: 100%;
+  }
+  .items-img_square {
+    border-radius: 5px;
+    object-fit: cover;
+  }
+  .items-img_circle {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .items-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    h3 {
+      font-size: 1.6rem;
+      font-weight: 500;
+    }
+    span {
+      color: #b3b3b3;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+  }
+}
+.music-items + .music-items {
+  margin-top: 24px;
+}

@@ -4,6 +4,7 @@
 import "./App.scss";
 
 import SideBar from "./components/sideBar";
+import Footer from "./layout/Footer/Footer";
 import HomePage from "./pages/homePage";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <div className="wrapper">
         <SideBar />
         <HomePage />
+        <Footer />
       </div>
     </div>
   );
