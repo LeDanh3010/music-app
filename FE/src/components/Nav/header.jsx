@@ -3,6 +3,7 @@
 import { IoIosSearch } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import "./header.scss";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -18,12 +19,12 @@ const Header = () => {
           </span>
         </div>
         <div className="header-user">
-          <a href="#" className="signUp">
+          <Link to="/signup" className="signUp">
             Sign up
-          </a>
-          <a href="#" className="login">
+          </Link>
+          <Link to="/login" className="login">
             Log in
-          </a>
+          </Link>
         </div>
       </div>
     </header>

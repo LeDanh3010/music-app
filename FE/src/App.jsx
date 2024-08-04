@@ -2,21 +2,27 @@
 //import reactLogo from "./assets/react.svg";
 //import viteLogo from "/vite.svg";
 import "./App.scss";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import SignUp from "./pages/Signup/SignUp.jsx";
+import HomePage from "./pages/Homepage/homePage.jsx";
 
-import SideBar from "./components/sideBar";
-import Footer from "./layout/Footer/Footer";
-import HomePage from "./pages/homePage";
-
-function App() {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
+  // Add more routes as needed
+]);
+const App = () => {
   return (
     <div className="App">
-      <div className="wrapper">
-        <SideBar />
-        <HomePage />
-        <Footer />
-      </div>
+      <RouterProvider router={router} />
     </div>
   );
-}
+};
 
 export default App;

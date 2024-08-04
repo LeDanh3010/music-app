@@ -1,8 +1,7 @@
-import "./musicItems.scss";
-import "overlayscrollbars/styles/overlayscrollbars.css";
-import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import { RiPlayMiniFill } from "react-icons/ri";
-const MusicItem = () => {
+import "./Card.scss";
+
+const Card = () => {
   const items = {
     Popular_Artists: [
       {
@@ -122,12 +121,8 @@ const MusicItem = () => {
       },
     ],
   };
-
   return (
-    <OverlayScrollbarsComponent
-      className="content-container"
-      options={{ scrollbars: { autoHide: "scroll" } }}
-    >
+    <>
       {Object.entries(items).map(([title, info]) => (
         <div className="music-items" key={title}>
           <header className="header-top">
@@ -143,16 +138,21 @@ const MusicItem = () => {
               return (
                 <>
                   <li key={index}>
-                    <a href="#">
-                      <img
-                        className={
-                          title === "Popular_Artists"
-                            ? "items-img items-img_circle"
-                            : "items-img items-img_square"
-                        }
-                        src={item.image_url}
-                        alt="music-img"
-                      />
+                    <a href="#" className="items-wrapper">
+                      <div className="img-wrapper">
+                        <img
+                          className={
+                            title === "Popular_Artists"
+                              ? "items-img items-img_circle"
+                              : "items-img items-img_square"
+                          }
+                          src={item.image_url}
+                          alt="music-img"
+                        />
+                        <a className="play-icon" href="#">
+                          <RiPlayMiniFill className="icon-custom" />
+                        </a>
+                      </div>
                       <div className="items-info">
                         <h3>
                           {title === "Popular_Artists" ||
@@ -168,9 +168,6 @@ const MusicItem = () => {
                         </span>
                       </div>
                     </a>
-                    <a className="play-icon" href="#">
-                      <RiPlayMiniFill className="icon-custom" />
-                    </a>
                   </li>
                 </>
               );
@@ -178,8 +175,8 @@ const MusicItem = () => {
           </ul>
         </div>
       ))}
-    </OverlayScrollbarsComponent>
+    </>
   );
 };
 
-export default MusicItem;
+export default Card;

@@ -77,6 +77,11 @@
       color: #b3b3b3;
       text-align: right;
       white-space: nowrap;
+      transition: font-size 0.1s ease;
+      &:hover {
+        color: #fff;
+        font-size: 1.5rem;
+      }
     }
     .login {
       color: #000;
@@ -84,6 +89,10 @@
       background-color: #fff;
       border-radius: 30px;
       white-space: nowrap;
+      transition: font-size 0.1s ease;
+      &:hover {
+        font-size: 1.5rem;
+      }
     }
   }
 }
