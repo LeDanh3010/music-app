@@ -1,11 +1,10 @@
 //import React from 'react';
-
 import { IoIosSearch } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
-import "./header.scss";
+import "../scss/components/NavHeader.scss";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const NavHeader = () => {
   return (
     <header className="header">
       <div className="header-wrapper">
@@ -31,4 +30,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default NavHeader;

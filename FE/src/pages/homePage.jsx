@@ -1,9 +1,9 @@
-import Footer from "../../layout/Footer/Footer";
-import Header from "../../components/Nav/header";
-import SideBar from "../../components/Sidebar/sideBar";
-import MainContent from "../../layout/MainContent/MainContent";
+import Footer from "../layout/Footer";
+import Header from "../components/NavHeader";
+import SideBar from "../components/sideBar";
+import MainContent from "../layout/MainContent";
 
-import "./homePage.scss";
+import "../scss/pages/homePage.scss";
 //import React from "react";
 
 const HomePage = () => {

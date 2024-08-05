@@ -1,23 +1,20 @@
+@use "../abstracts";
+
 .header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include abstracts.flex(null, space-between, center);
   flex-flow: row;
   padding-top: 8px;
   height: 60px;
   h1 {
-    font-size: 2.3rem;
-    font-weight: 700;
+    @include abstracts.font(2.3rem, 700);
     a:hover {
       text-decoration: underline;
     }
   }
   span {
-    font-size: 1.2rem;
-
-    font-weight: 700;
+    @include abstracts.font(1.2rem, 700);
     a {
-      color: #b3b3b3;
+      color: abstracts.$text-secondary;
       &:hover {
         text-decoration: underline;
       }
@@ -48,7 +45,7 @@
       font-size: 3.5rem;
       color: #1f1f1f;
       opacity: 0;
-      transform: translateY(5px);
+      transform: translateY(10px);
       transition: transform 0.3s ease, opacity 0.3s ease;
       .icon-custom {
         z-index: 1;
@@ -81,7 +78,7 @@
       }
     }
     &:hover {
-      background-color: #1f1f1f;
+      background-color: #242424;
     }
   }
 
@@ -99,17 +96,14 @@
     object-fit: cover;
   }
   .items-info {
-    display: flex;
-    flex-direction: column;
+    @include abstracts.flex(column);
     gap: 8px;
     h3 {
-      font-size: 1.3rem;
-      font-weight: 600;
+      @include abstracts.font(1.3rem, 600);
     }
     span {
-      color: #b3b3b3;
-      font-size: 1.1rem;
-      font-weight: 600;
+      color: abstracts.$text-secondary;
+      @include abstracts.font(1.1rem, 600);
     }
   }
 }

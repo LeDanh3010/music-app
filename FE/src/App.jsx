@@ -3,8 +3,8 @@
 //import viteLogo from "/vite.svg";
 import "./App.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import SignUp from "./pages/Signup/SignUp.jsx";
-import HomePage from "./pages/Homepage/homePage.jsx";
+import SignUp from "./pages/SignUp.jsx";
+import HomePage from "./pages/homePage.jsx";
 
 const router = createBrowserRouter([
   {

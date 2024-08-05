@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 .sidebar {
   display: grid;
   grid-template-columns: 1fr;
@@ -12,16 +14,14 @@
   .sidebar-logo {
     display: flex;
     a {
-      display: flex;
-      align-items: center;
+      @include abstracts.flex(null, null, center);
       gap: 5px;
       height: 24px;
       margin-top: 20px;
       padding: 0 24px;
     }
     span {
-      font-weight: 600;
-      font-size: 1.8rem;
+      @include abstracts.font(1.8rem, 600);
     }
   }
   .sidebar-icon {
@@ -37,32 +37,27 @@
       height: 48px;
     }
     a {
-      display: flex;
-
+      @include abstracts.flex(null, null, center);
       gap: 20px;
-      align-items: center;
       height: 100%;
     }
     span {
-      font-weight: 600;
-      font-size: 1.6rem;
+      @include abstracts.font(1.6rem, 600);
     }
   }
 }
 .sidebar-header.box2 {
-  display: flex;
-  justify-content: space-between;
+  @include abstracts.flex(null, space-between, null);
 }
 .sidebar-icon.plus {
-  font-size: 1.8rem;
+  @include abstracts.font(1.8rem, null);
   cursor: pointer;
   margin-right: 15px;
 }
 
 //css create playlist
 .create-playlist-container {
-  display: flex;
-  flex-direction: column;
+  @include abstracts.flex(column);
   gap: 20px;
   width: 100%;
   padding: 0 12px;
@@ -81,12 +76,10 @@
     border-radius: 8px;
     margin-bottom: 20px;
     h4 {
-      font-size: 1.4rem;
-      font-weight: 700;
+      @include abstracts.font(1.4rem, 700);
     }
     p {
-      font-size: 1.3rem;
-      font-weight: 500;
+      @include abstracts.font(1.3rem, 500);
       margin: 10px 0 0px;
     }
     .create-playlist-btn {
@@ -99,17 +92,14 @@
 
 //btn general{
 .btn {
-  font-size: 1.3rem;
-  font-weight: 700;
+  @include abstracts.font(1.3rem, 700);
 }
 
 //sidebar bottom
 .sidebar-footer {
-  display: flex;
-  flex-direction: column;
-  //height: 100%;
+  @include abstracts.flex(column);
   .privacy-policy {
-    font-size: 1rem;
+    @include abstracts.font(1rem, null);
     padding: 0 24px;
     margin: 32px 0;
 
@@ -129,8 +119,7 @@
     display: flex;
 
     .btn-language {
-      display: flex;
-      align-items: center;
+      @include abstracts.flex(null, null, center);
       background-color: transparent;
       border: 1px solid #7c7c7c;
       color: #ffff;

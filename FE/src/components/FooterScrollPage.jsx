@@ -1,7 +1,7 @@
 import { IoLogoInstagram } from "react-icons/io";
 import { IoLogoTwitter } from "react-icons/io";
 import { BiLogoFacebookCircle } from "react-icons/bi";
-import "./FooterScrollPage.scss";
+import "../scss/components/FooterScrollPage.scss";
 
 const FooterScrollPage = () => {
   return (

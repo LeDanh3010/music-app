@@ -2,7 +2,7 @@ import { FaSpotify } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
 import { FaApple } from "react-icons/fa";
-import "./Signup.scss";
+import "../scss/pages/Signup.scss";
 
 const SignUp = () => {
   return (

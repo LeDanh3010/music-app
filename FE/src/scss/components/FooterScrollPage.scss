@@ -1,3 +1,5 @@
+@use "../abstracts";
+
 .footer-page {
   padding-top: 40px;
   margin: 0 -16px;
@@ -20,16 +22,12 @@
     }
   }
   h5 {
-    font-size: 1.1rem;
-    font-weight: 600;
+    @include abstracts.font(1.1rem, 600);
     margin-bottom: 8px;
   }
   .footer-social {
     ul {
-      display: flex;
-
-      justify-content: space-around;
-      align-items: center;
+      @include abstracts.flex(null, space-around, center);
     }
     .social {
       margin-top: 0;

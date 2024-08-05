@@ -1,8 +1,8 @@
-import "./MainContent.scss";
+import "../scss/layouts/MainContent.scss";
 import "overlayscrollbars/styles/overlayscrollbars.css";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
-import Card from "../../components/Card/Card";
-import FooterScrollPage from "../../components/FooterScrollPage/FooterScrollPage";
+import Card from "../components/Card";
+import FooterScrollPage from "../components/FooterScrollPage";
 
 const MainContent = () => {
   return (

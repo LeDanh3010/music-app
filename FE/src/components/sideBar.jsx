@@ -1,12 +1,12 @@
 import { GoHomeFill } from "react-icons/go";
 import { FaSpotify } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
-import "./sideBar.scss";
 import { VscThreeBars } from "react-icons/vsc";
 import { FaPlus } from "react-icons/fa6";
 import { FaEarthAmericas } from "react-icons/fa6";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "overlayscrollbars/styles/overlayscrollbars.css";
+import "../scss/components/sideBar.scss";
 
 //import React from "react";
 const SideBar = () => {

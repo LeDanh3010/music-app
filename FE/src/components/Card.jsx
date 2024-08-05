@@ -1,5 +1,5 @@
 import { RiPlayMiniFill } from "react-icons/ri";
-import "./Card.scss";
+import "../scss/components/Card.scss";
 
 const Card = () => {
   const items = {
