@@ -13,7 +13,7 @@ const SignUp = () => {
         </header>
         <section>
           <div className="signup-body">
-            <h1>Sign up to start learning</h1>
+            <h1>Sign up to start listening</h1>
             <form className="signup-form">
               <label className="form-label" htmlFor="email">
                 Email address
@@ -24,34 +24,39 @@ const SignUp = () => {
                 className="form-input"
                 placeholder="name@domain.com"
               />
-              <button type="submit">Next</button>
+              <button className="btn-submit" type="submit">
+                Next
+              </button>
             </form>
             <div className="signup-social">
-              <hr />
-              <button className="google">
-                <FcGoogle />
-                <span>Sign up with Google</span>
-              </button>
-              <button className="facebook">
-                <SiFacebook />
-                <span>Sign up with Facebook</span>
-              </button>
-              <button className="apple">
-                <FaApple />
-                <span>Sign up with Apple</span>
-              </button>
-              <hr />
-              <p>
-                Already have an account? <a href="/login">Login</a>
+              <div className="divider-top">or</div>
+              <div className="social-wrapper">
+                <a href="#" className="btn-social btn-google">
+                  <FcGoogle className="social-icon" />
+                  <span className="social-text">Sign up with Google</span>
+                </a>
+                <a href="#" className="btn-social btn-facebook">
+                  <SiFacebook className="social-icon" />
+                  <span className="social-text">Sign up with Facebook</span>
+                </a>
+                <a href="#" className="btn-social btn-apple">
+                  <FaApple className="social-icon" />
+                  <span className="social-text">Sign up with Apple</span>
+                </a>
+              </div>
+              <hr className="divider-bottom" />
+              <p className="signup-bottom">
+                <span>Already have an account?</span>{" "}
+                <a href="/login">Login in here</a>
               </p>
             </div>
           </div>
         </section>
-        <footer>
+        <footer className="signup-footer">
           <p>
-            This site is protected by reCAPTCHA and the Google
-            <a href="#">Privacy Policy</a> and
-            <a href="#">Terms of Service</a> apply.
+            This site is protected by reCAPTCHA and the Google{" "}
+            <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>{" "}
+            apply.
           </p>
         </footer>
       </div>

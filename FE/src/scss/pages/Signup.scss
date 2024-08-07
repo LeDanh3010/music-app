@@ -11,7 +11,7 @@
   }
   section {
     margin: 0 auto;
-    max-width: 388px;
+    max-width: 400px;
     .signup-body {
       padding: 0 32px;
       text-align: center;
@@ -27,10 +27,103 @@
         text-align: left;
       }
       .form-input {
-        padding: 12px 16px;
+        padding: 15px;
         border-radius: 4px;
         background-color: transparent;
+        border: 1px solid abstracts.$divider-line;
+        color: #fff;
+        margin: 8px 0 25px;
+        &::placeholder {
+          @include abstracts.font(1.4rem, 600);
+        }
       }
+      .form-input:hover {
+        border: 1px solid #fff;
+      }
+      .form-input:focus {
+        outline: 1px solid #fff;
+      }
+      .btn-submit {
+        padding: 15px 0;
+        @include abstracts.font(1.6rem, 700);
+        background-color: abstracts.$button-color;
+        border-radius: 25px;
+      }
+    }
+    .signup-social {
+      margin-top: 32px;
+      .divider-top {
+        @include abstracts.font(1.2rem, 600);
+        @include abstracts.flex(null, center, center);
+        &::before,
+        &::after {
+          content: "";
+          border-bottom: 1px solid abstracts.$divider-line;
+          flex: 1;
+        }
+        &::before {
+          margin-right: 16px;
+        }
+        &::after {
+          margin-left: 16px;
+        }
+      }
+      .social-wrapper {
+        margin-top: 32px;
+        @include abstracts.flex(column);
+        gap: 10px;
+        .btn-social {
+          @include abstracts.flex(null, null, center);
+          gap: 15px;
+          width: 100%;
+          padding: 15px 25px;
+          @include abstracts.font(1.5rem, 500);
+          background-color: transparent;
+          border: 1px solid abstracts.$divider-line;
+          border-radius: 30px;
+          .social-icon {
+            font-size: 2.5rem;
+          }
+          .social-text {
+            flex: 1;
+            text-align: center;
+          }
+        }
+        .btn-social:hover {
+          border: 1px solid #fff;
+        }
+      }
+      .divider-bottom {
+        border: 0;
+        border-bottom: 1px solid abstracts.$divider-line;
+        margin: 32px 0;
+      }
+      .signup-bottom {
+        span {
+          @include abstracts.font(1.5rem, 500);
+          color: abstracts.$text-secondary;
+        }
+        a {
+          @include abstracts.font(1.5rem, 500);
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .signup-footer {
+    padding: 24px;
+    p,
+    a {
+      color: abstracts.$text-secondary;
+    }
+    p {
+      width: 100%;
+      margin: 0 auto;
+      max-width: 280px;
+      text-align: center;
+    }
+    a {
+      text-decoration: underline;
     }
   }
 }
