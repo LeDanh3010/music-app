@@ -1,182 +1,70 @@
 import { RiPlayMiniFill } from "react-icons/ri";
+import PropTypes from "prop-types";
 import "../scss/components/Card.scss";
 
-const Card = () => {
-  const items = {
-    Popular_Artists: [
-      {
-        name: "Mrs. GREEN APPLE",
-        type: "Artist",
-        image_url: "https://via.placeholder.com/150",
-      },
-      {
-        name: "back number",
-        type: "Artist",
-        image_url: "https://via.placeholder.com/150",
-      },
-      {
-        name: "Vaundy",
-        type: "Artist",
-        image_url: "https://via.placeholder.com/150",
-      },
-      {
-        name: "Yorushika",
-        type: "Artist",
-        image_url: "https://via.placeholder.com/150",
-      },
-      {
-        name: "YOASOBI",
-        type: "Artist",
-        image_url: "https://via.placeholder.com/150",
-      },
-      // {
-      //   id: 7,
-      //   name: "Aimyon",
-      //   type: "Artist",
-      //   image_url: "https://via.placeholder.com/150",
-      // },
-      // {
-      //   id: 8,
-      //   name: "Kenshi Yonezu",
-      //   type: "Artist",
-      //   image_url: "https://via.placeholder.com/150",
-      // },
-      // {
-      //   id: 10,
-      //   name: "Creepy Nuts",
-      //   type: "Artist",
-      //   image_url: "https://via.placeholder.com/150",
-      // },
-    ],
-    Popular_Albums: [
-      {
-        musicName: "ANTENNA",
-        artist: "Mrs. GREEN APPLE",
-        image_url: "https://via.placeholder.com/150",
-      },
-      {
-        musicName: "No.0 ~ring~",
-        artist: "Number_j",
-        image_url: "https://via.placeholder.com/150",
-      },
-      {
-        musicName: "strobo",
-        artist: "Vaundy",
-        image_url: "https://via.placeholder.com/150",
-      },
-      {
-        musicName: "Happy Ending",
-        artist: "Yorushika",
-        image_url: "https://via.placeholder.com/150",
-      },
-      {
-        musicName: "SUPER REAL ME",
-        artist: "ILLIT",
-        image_url: "https://via.placeholder.com/150",
-      },
-      // {
-      //   id: 18,
-      //   musicName: "I wonder",
-      //   artist: "Da-iCE",
-      //   image_url: "https://via.placeholder.com/150",
-      // },
-      // {
-      //   id: 20,
-      //   musicName: "ユーモア",
-      //   artist: "back number",
-      //   image_url: "https://via.placeholder.com/150",
-      // },
-      // {
-      //   id: 11,
-      //   musicName: "Bling-Bang-Bang-Born",
-      //   artist: "Creepy Nuts",
-      //   image_url: "https://via.placeholder.com/150",
-      // },
-    ],
-    Popular_Radio: [
-      {
-        name: "Mrs. GREEN APPLE",
-        type: "Artist",
-        image_url: "https://via.placeholder.com/150",
-      },
-      {
-        name: "back number",
-        type: "Artist",
-        image_url: "https://via.placeholder.com/150",
-      },
-      {
-        name: "Vaundy",
-        type: "Artist",
-        image_url: "https://via.placeholder.com/150",
-      },
-      {
-        name: "Yorushika",
-        type: "Artist",
-        image_url: "https://via.placeholder.com/150",
-      },
-      {
-        name: "YOASOBI",
-        type: "Artist",
-        image_url: "https://via.placeholder.com/150",
-      },
-    ],
-  };
+const Card = ({
+  typePage,
+  title,
+  key,
+  name,
+  musicName,
+  artist,
+  image_url,
+  type,
+  titleName,
+}) => {
   return (
-    <>
-      {Object.entries(items).map(([title, info]) => (
-        <div className="music-items" key={title}>
-          <header className="header-top">
-            <h1>
-              <a href="#">{title.replace(/_/g, " ")}</a>
-            </h1>
-            <span>
-              <a href="">Show all</a>
+    <li key={key}>
+      <a href="#" className="items-wrapper">
+        <div className="img-wrapper">
+          <img
+            className={
+              title === "Popular_Artists"
+                ? "items-img items-img_circle"
+                : "items-img items-img_square"
+            }
+            src={image_url}
+            alt="music-img"
+          />
+          {typePage !== "search" && (
+            <span className="play-icon">
+              <RiPlayMiniFill className="icon-custom" />
             </span>
-          </header>
-          <ul className="items">
-            {info.map((item, index) => {
-              return (
-                <>
-                  <li key={index}>
-                    <a href="#" className="items-wrapper">
-                      <div className="img-wrapper">
-                        <img
-                          className={
-                            title === "Popular_Artists"
-                              ? "items-img items-img_circle"
-                              : "items-img items-img_square"
-                          }
-                          src={item.image_url}
-                          alt="music-img"
-                        />
-                        <a className="play-icon" href="#">
-                          <RiPlayMiniFill className="icon-custom" />
-                        </a>
-                      </div>
-                      <div className="items-info">
-                        <h3>
-                          {title === "Popular_Artists" ||
-                          title === "Popular_Radio"
-                            ? item.name
-                            : item.musicName}
-                        </h3>
-                        <span>
-                          {title === "Popular_Artists" ||
-                          title === "Popular_Radio"
-                            ? item.type
-                            : item.artist}
-                        </span>
-                      </div>
-                    </a>
-                  </li>
-                </>
-              );
-            })}
-          </ul>
+          )}
         </div>
-      ))}
-    </>
+        <div className="items-info">
+          {typePage !== "search" ? (
+            <h3>
+              {title === "Popular_Artists" || title === "Popular_Radio"
+                ? name
+                : musicName}
+            </h3>
+          ) : (
+            <h3>{titleName}</h3>
+          )}
+
+          {typePage !== "search" && (
+            <span>
+              {title === "Popular_Artists" || title === "Popular_Radio"
+                ? type
+                : artist}
+            </span>
+          )}
+        </div>
+      </a>
+    </li>
   );
 };
 
+Card.propTypes = {
+  title: PropTypes.string,
+  key: PropTypes.string,
+  name: PropTypes.string,
+  musicName: PropTypes.string,
+  artist: PropTypes.string,
+  image_url: PropTypes.string,
+  type: PropTypes.string,
+  typePage: PropTypes.string,
+  titleName: PropTypes.string,
+};
 export default Card;

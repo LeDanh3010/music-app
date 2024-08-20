@@ -1,0 +1,43 @@
+@use "../abstracts";
+
+.form-label {
+  text-align: left;
+  margin-bottom: 8px;
+}
+.input-container {
+  position: relative;
+  .form-input {
+    font-size: 1.5rem;
+    width: 100%;
+    padding: 15px;
+    border-radius: 4px;
+    background-color: transparent;
+    border: 1px solid abstracts.$divider-line;
+    color: #fff;
+    font-weight: 400;
+    &::placeholder {
+      @include abstracts.font(1.4rem, 600);
+    }
+  }
+  .email {
+    margin-bottom: 25px;
+  }
+
+  .form-input:hover {
+    border: 1px solid #fff;
+  }
+  .form-input:focus {
+    outline: 1px solid #fff;
+  }
+  .password-toggle {
+    display: flex;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 18px;
+  }
+  // .password-toggle-button i {
+  // }
+}

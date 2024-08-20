@@ -1,0 +1,125 @@
+@use "../abstracts";
+
+.login-wrapper {
+  background-color: abstracts.$main-background;
+}
+.login-content {
+  padding: 32px;
+  .login-body {
+    max-width: 734px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: abstracts.$secondary-background;
+    border-radius: 10px;
+    .login-brand {
+      @include abstracts.flex(null, center, center);
+      font-size: 4.1rem;
+      padding: 32px 0 24px;
+    }
+    h1 {
+      @include abstracts.font(2.5rem, 700);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .divider-line {
+      @include abstracts.divider();
+      margin-left: 120px;
+      margin-right: 120px;
+    }
+    .login-social-wrapper {
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto;
+    }
+    .login-form {
+      @include abstracts.font(1.3rem, 600);
+      @include abstracts.flex(column);
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto;
+      .remember-me-container {
+        display: flex;
+        gap: 5px;
+        margin-top: 25px;
+        margin-bottom: 32px;
+        .rememberMe-text {
+          @include abstracts.font(1.1rem, 600);
+        }
+      }
+      .slider-container {
+        position: relative;
+        display: inline-block;
+        width: 30px;
+        height: 16px;
+        input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        input:checked + .slider {
+          background-color: abstracts.$button-color;
+        }
+        input:checked + .slider:before {
+          transform: translateX(14px);
+        }
+        input:focus + .slider {
+          box-shadow: 0 0 0 3.5px abstracts.$main-background,
+            0 0 0 7px rgb(255, 255, 255);
+        }
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: abstracts.$divider-line;
+          transition: 0.4s;
+          border-radius: 24px;
+          &:before {
+            position: absolute;
+            content: "";
+            height: 12px;
+            width: 12px;
+            left: 2px;
+            bottom: 2px;
+            background-color: abstracts.$main-background;
+            transition: 0.4s;
+            border-radius: 50%;
+          }
+        }
+      }
+      .login-forgot-password {
+        margin-top: 32px;
+        text-align: center;
+        font-weight: 500;
+        a {
+          text-decoration: underline;
+          &:hover {
+            color: abstracts.$button-color;
+          }
+        }
+      }
+    }
+    .login-bottom {
+      text-align: center;
+      padding-bottom: 32px;
+      span {
+        @include abstracts.font(1.3rem, 500);
+        color: abstracts.$text-secondary;
+      }
+      a {
+        text-decoration: underline;
+        @include abstracts.font(1.3rem, 600);
+        &:hover {
+          color: abstracts.$button-color;
+        }
+      }
+    }
+  }
+}
+.login-footer {
+  background-color: abstracts.$secondary-background;
+  text-align: center;
+  padding: 25px 0;
+}

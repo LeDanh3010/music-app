@@ -1,0 +1,107 @@
+@use "../abstracts";
+.sidebar-plus {
+  @include abstracts.font(1.8rem, null);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.1s linear;
+  margin-right: 5px;
+  position: relative;
+  span {
+    display: flex;
+    @include abstracts.font(1.4rem, null);
+  }
+  &:hover {
+    background-color: #1f1f1f;
+  }
+}
+
+//css tippy 1
+.tippy-box.custom-tippy-btnPlus {
+  background-color: #282828;
+  border-radius: 8px;
+  padding: 12px;
+  pointer-events: auto;
+  top: -8px;
+  cursor: pointer;
+  .tippy-content {
+    padding: 0;
+    .plus-modal-wrapper {
+      @include abstracts.flex(null, null, center);
+      gap: 6px;
+      &::before {
+        display: none;
+        content: "";
+        position: absolute;
+        inset: -7px;
+        background-color: #3e3e3e;
+        border-radius: 4px;
+        z-index: -1;
+      }
+    }
+    .plus-modal-icon {
+      @include abstracts.font(1.7rem, 600);
+    }
+    span {
+      @include abstracts.font(1.3rem, 600);
+    }
+    &::before {
+      display: none;
+      content: "";
+      position: absolute;
+      inset: -7px;
+      background-color: #3e3e3e;
+      border-radius: 4px;
+      z-index: -1;
+    }
+    &:hover::before {
+      display: block;
+    }
+  }
+}
+
+//css tippy 2
+.tippy-box.custom-tippy-btnCreatePlaylist {
+  background-color: abstracts.$background-popup !important;
+  border-radius: 8px;
+  pointer-events: auto !important;
+  .tippy-content {
+    padding: 16px;
+    h4 {
+      @include abstracts.font(1.5rem, 600);
+      margin-bottom: 6px;
+    }
+    p {
+      @include abstracts.font(1.3rem, 500);
+    }
+    .create-playlist-btn {
+      margin-top: 20px;
+      @include abstracts.flex(null, flex-end, null);
+
+      gap: 10px;
+      button {
+        @include abstracts.font(1.2rem, 650);
+        padding: 5px 10px;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+      .not-now {
+        color: abstracts.$text-secondary;
+        background-color: transparent;
+        &:hover {
+          color: #fff;
+        }
+      }
+      .login {
+        background-color: #fff;
+        border-radius: 15px;
+        cursor: pointer;
+      }
+    }
+  }
+  .tippy-arrow {
+    color: abstracts.$background-popup;
+    margin-top: -45px;
+  }
+}

@@ -3,20 +3,17 @@ import Header from "../layout/NavHeader";
 import SideBar from "../layout/sideBar";
 import MainContent from "../layout/MainContent";
 
-import "../scss/pages/homePage.scss";
-//import React from "react";
-
-const HomePage = () => {
+const Search = () => {
   return (
     <div className="wrapper">
       <SideBar />
       <div className="main-page">
-        <Header page="home" />
-        <MainContent page="home" />
+        <Header page="search" />
+        <MainContent page="search" />
       </div>
       <Footer />
     </div>
   );
 };
 
-export default HomePage;
+export default Search;

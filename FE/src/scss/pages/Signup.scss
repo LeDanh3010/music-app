@@ -1,8 +1,18 @@
 @use "../abstracts";
 
 .signup {
+  height: 100dvh;
+  overflow: auto;
+  position: relative;
   background-color: abstracts.$main-background;
   .signup-wrapper {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    @include abstracts.flex(column);
+    background-color: abstracts.$main-background;
     header {
       @include abstracts.flex(null, center, center);
       font-size: 4.1rem;
@@ -10,9 +20,11 @@
     }
   }
   section {
+    display: flex;
+    flex-grow: 1;
     margin: 0 auto;
-    max-width: 400px;
     .signup-body {
+      position: relative;
       padding: 0 32px;
       text-align: center;
     }
@@ -23,42 +35,15 @@
     .signup-form {
       @include abstracts.font(1.3rem, 600);
       @include abstracts.flex(column);
-      .form-label {
-        text-align: left;
-      }
-      .form-input {
-        padding: 15px;
-        border-radius: 4px;
-        background-color: transparent;
-        border: 1px solid abstracts.$divider-line;
-        color: #fff;
-        margin: 8px 0 25px;
-        &::placeholder {
-          @include abstracts.font(1.4rem, 600);
-        }
-      }
-      .form-input:hover {
-        border: 1px solid #fff;
-      }
-      .form-input:focus {
-        outline: 1px solid #fff;
-      }
-      .btn-submit {
-        padding: 15px 0;
-        @include abstracts.font(1.6rem, 700);
-        background-color: abstracts.$button-color;
-        border-radius: 25px;
-      }
     }
     .signup-social {
-      margin-top: 32px;
       .divider-top {
         @include abstracts.font(1.2rem, 600);
         @include abstracts.flex(null, center, center);
         &::before,
         &::after {
           content: "";
-          border-bottom: 1px solid abstracts.$divider-line;
+          @include abstracts.divider();
           flex: 1;
         }
         &::before {
@@ -68,35 +53,9 @@
           margin-left: 16px;
         }
       }
-      .social-wrapper {
-        margin-top: 32px;
-        @include abstracts.flex(column);
-        gap: 10px;
-        .btn-social {
-          @include abstracts.flex(null, null, center);
-          gap: 15px;
-          width: 100%;
-          padding: 15px 25px;
-          @include abstracts.font(1.5rem, 500);
-          background-color: transparent;
-          border: 1px solid abstracts.$divider-line;
-          border-radius: 30px;
-          .social-icon {
-            font-size: 2.5rem;
-          }
-          .social-text {
-            flex: 1;
-            text-align: center;
-          }
-        }
-        .btn-social:hover {
-          border: 1px solid #fff;
-        }
-      }
+
       .divider-bottom {
-        border: 0;
-        border-bottom: 1px solid abstracts.$divider-line;
-        margin: 32px 0;
+        @include abstracts.divider();
       }
       .signup-bottom {
         span {
@@ -112,18 +71,120 @@
   }
   .signup-footer {
     padding: 24px;
-    p,
-    a {
-      color: abstracts.$text-secondary;
-    }
-    p {
+    .footer-privacy {
       width: 100%;
       margin: 0 auto;
       max-width: 280px;
       text-align: center;
     }
-    a {
-      text-decoration: underline;
+  }
+
+  /*********************step1*****************************/
+
+  //progress bar
+  .progress-bar-wrapper {
+    position: absolute;
+    background-color: abstracts.$divider-line;
+    height: 2px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    .progress-bar {
+      top: 0;
+      left: 0;
+      position: absolute;
+      height: 100%;
+      background-color: abstracts.$button-color;
+      animation: progress-animation 2s linear;
     }
+  }
+  .signup-header {
+    padding: 20px 0 30px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: 0;
+    top: 0;
+    width: 100%;
+    .signup-back-icon,
+    span {
+      color: abstracts.$text-secondary;
+    }
+    .signup-back-icon {
+      @include abstracts.font(4rem);
+      cursor: pointer;
+    }
+    .signup-text-wrapper {
+      @include abstracts.font(1.6rem);
+      gap: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+  }
+  .signup-form-step {
+    @include abstracts.font(1.3rem, 600);
+    @include abstracts.flex(column);
+    padding-top: 100px;
+    gap: 15px;
+    margin-bottom: 25px;
+    .signup-form-password {
+      display: flex;
+      flex-direction: column;
+    }
+    .sign-form-requirement {
+      margin: 18px 0 30px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .requirement-text {
+      @include abstracts.font(1.3rem, 500);
+      color: abstracts.$text-secondary;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      li {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+    }
+
+    /*********************step2*****************************/
+    .user-name,
+    .date-birth {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  /*********************step3*****************************/
+  .term-condition {
+    padding: 16px;
+    background-color: #2a2a2a;
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+    label {
+      @include abstracts.font(1.3rem, 500);
+      text-align: left;
+    }
+  }
+}
+
+@media (width >= 480px) {
+  .signup-body {
+    width: 400px;
+  }
+}
+
+@keyframes progress-animation {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 50%;
   }
 }

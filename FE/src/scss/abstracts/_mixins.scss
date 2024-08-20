@@ -1,3 +1,5 @@
+@use "./colors";
+
 //mixin flex
 @mixin flex($direction: null, $justify: null, $align: null) {
   display: flex;
@@ -9,4 +11,28 @@
 @mixin font($size: null, $weight: null) {
   font-size: $size;
   font-weight: $weight;
+}
+
+//divider line
+@mixin divider() {
+  border: 0;
+  border-bottom: 1px solid colors.$divider-line;
+  margin: 32px 0;
+}
+
+//button
+@mixin btn(
+  $padding: 15px,
+  $size: 1.6rem,
+  $weight: 700,
+  $color: colors.$button-color,
+  $fillet: 25px
+) {
+  width: 100%;
+  cursor: pointer;
+  padding: $padding 0;
+  font-size: $size;
+  font-weight: $weight;
+  background-color: $color;
+  border-radius: $fillet;
 }

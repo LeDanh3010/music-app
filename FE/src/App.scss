@@ -40,18 +40,3 @@
 .read-the-docs {
   color: #888;
 } */
-
-.wrapper {
-  background-color: #000;
-  width: 100%;
-  padding: 8px;
-  display: grid;
-  gap: 8px;
-  grid-template-columns: min-content auto;
-  //grid-template-columns: auto 1fr;
-  grid-template-rows: 580px 1fr;
-  //grid-template-rows: 1fr auto;
-  grid-template-areas:
-    "sidebar homepage"
-    "footer footer ";
-}

@@ -1,0 +1,70 @@
+@use "../abstracts";
+
+.header-top {
+  @include abstracts.flex(null, space-between, center);
+  flex-flow: row;
+  padding-top: 8px;
+  height: 60px;
+  h1 {
+    @include abstracts.font(2.3rem, 700);
+    a:hover {
+      text-decoration: underline;
+    }
+  }
+  span {
+    @include abstracts.font(1.2rem, 700);
+    a {
+      color: abstracts.$text-secondary;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  margin: 0 -8px;
+  li {
+    border-radius: 8px;
+    padding: 10px;
+
+    &:hover {
+      .play-icon {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    &:hover {
+      background-color: #242424;
+    }
+  }
+
+  .items-img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .items-img_square {
+    border-radius: 5px;
+    object-fit: cover;
+  }
+  .items-img_circle {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .items-info {
+    @include abstracts.flex(column);
+    gap: 8px;
+    h3 {
+      @include abstracts.font(1.3rem, 600);
+    }
+    span {
+      color: abstracts.$text-secondary;
+      @include abstracts.font(1.1rem, 600);
+    }
+  }
+}
+.music-items + .music-items {
+  margin-top: 24px;
+}

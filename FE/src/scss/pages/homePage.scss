@@ -1,4 +1,21 @@
+.wrapper {
+  background-color: #000;
+  width: 100%;
+  height: 100dvh;
+  padding: 8px;
+  overflow-y: auto;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "sidebar homepage"
+    "footer footer ";
+}
+
 .main-page {
+  display: grid;
+  grid-template-rows: min-content minmax(150px, 1fr);
   background-color: #121212;
   border-radius: 8px;
   grid-area: homepage;

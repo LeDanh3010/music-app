@@ -95,7 +95,7 @@ const FooterScrollPage = () => {
         </div>
         <hr />
         <div className="footer-copyright">
-          <p>�2021 Spotify AB</p>
+          <p>�2024 Copyright DALE</p>
         </div>
       </div>
     </div>

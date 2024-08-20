@@ -1,0 +1,5 @@
+@use "../abstracts";
+
+.btn-submit {
+  @include abstracts.btn();
+}

@@ -1,0 +1,9 @@
+@use "../abstracts";
+
+.footer-privacy {
+  color: abstracts.$text-secondary;
+  a {
+    color: abstracts.$text-secondary;
+    text-decoration: underline;
+  }
+}

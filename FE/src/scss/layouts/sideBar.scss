@@ -1,0 +1,272 @@
+@use "../abstracts";
+
+.sidebar {
+  @include abstracts.flex(column);
+  grid-area: sidebar;
+  width: 340px;
+  z-index: 9999;
+  .sidebar-wrapper {
+    @include abstracts.flex(column);
+    position: relative;
+    height: 100%;
+    row-gap: 8px;
+    .sidebar-nav {
+      width: 100%;
+      background-color: #121212;
+      border-radius: 8px;
+    }
+  }
+}
+//header sidebar general
+.sidebar-header {
+  padding: 8px 12px;
+  margin: 0px;
+  color: abstracts.$text-secondary;
+  @include abstracts.font(1.6rem, 600);
+
+  .sidebar-home,
+  .sidebar-search {
+    padding: 4px 12px;
+    height: 48px;
+    display: flex;
+  }
+  a {
+    @include abstracts.flex(null, null, center);
+    gap: 20px;
+    height: 100%;
+    &.active {
+      color: #fff;
+    }
+  }
+  a,
+  span {
+    color: abstracts.$text-secondary;
+    transition: color 0.2s linear;
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+.sidebar-icon {
+  font-size: 2.8rem;
+}
+
+.sidebar-nav.top {
+  .sidebar-logo {
+    display: flex;
+    @include abstracts.font(1.8rem, 600);
+    a {
+      @include abstracts.flex(null, null, center);
+      gap: 5px;
+      height: 24px;
+      margin-top: 20px;
+      padding: 0 24px;
+    }
+  }
+}
+
+.sidebar-nav.bottom {
+  @include abstracts.flex(column);
+  position: relative;
+  height: 100%;
+  .sidebar-bottom-wrapper {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    display: grid;
+    grid-template-rows: minmax(50px, 80px) minmax(120px, 1fr) min-content;
+  }
+  .sidebar-header.box2 {
+    @include abstracts.flex(null, space-between, center);
+    .sidebar-home {
+      @include abstracts.flex(null, null, center);
+      gap: 10px;
+    }
+  }
+
+  //css create playlist
+  .create-playlist-container {
+    width: 100%;
+    padding: 0 12px;
+    color: #ffff;
+    .os-scrollbar-handle {
+      background-color: #d3cbcb35;
+    }
+    .create-playlist {
+      position: relative;
+      overflow: visible;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 35px;
+      height: 145px;
+      padding: 22px 20px 15px;
+      background-color: #1f1f1f;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      h4 {
+        @include abstracts.font(1.4rem, 700);
+      }
+      p {
+        @include abstracts.font(1.3rem, 500);
+        margin: 10px 0 0px;
+      }
+      .create-playlist-btn {
+        width: fit-content;
+        border-radius: 20px;
+        padding: 8px 16px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+//btn general{
+.btn {
+  @include abstracts.font(1.3rem, 700);
+}
+
+//sidebar bottom
+.sidebar-footer {
+  @include abstracts.flex(column);
+  .privacy-policy {
+    @include abstracts.font(1rem, null);
+    padding: 0 24px;
+    margin: 32px 0;
+
+    a {
+      color: #b3b3b3;
+      margin-right: 17px;
+      line-height: 28px;
+    }
+  }
+  .privacy-policy-top {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  .btn-footer {
+    margin-bottom: 32px;
+    padding: 0 24px;
+    display: flex;
+
+    .btn-language {
+      @include abstracts.flex(null, null, center);
+      background-color: transparent;
+      border: 1px solid #7c7c7c;
+      color: #ffff;
+      padding: 8px 15px;
+      border-radius: 25px;
+      span {
+        margin-left: 3px;
+      }
+    }
+  }
+}
+
+.sidebar-plus {
+  @include abstracts.font(1.8rem, null);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.1s linear;
+  margin-right: 5px;
+  position: relative;
+  span {
+    display: flex;
+    @include abstracts.font(1.4rem, null);
+  }
+  &:hover {
+    background-color: #1f1f1f;
+  }
+}
+
+//css tippy 1
+.tippy-box.custom-tippy-btnPlus {
+  background-color: #282828;
+  border-radius: 8px;
+  padding: 12px;
+  pointer-events: auto;
+  top: -8px;
+  cursor: pointer;
+  .tippy-content {
+    padding: 0;
+    .plus-modal-wrapper {
+      @include abstracts.flex(null, null, center);
+      gap: 6px;
+      &::before {
+        display: none;
+        content: "";
+        position: absolute;
+        inset: -7px;
+        background-color: #3e3e3e;
+        border-radius: 4px;
+        z-index: -1;
+      }
+    }
+    .plus-modal-icon {
+      @include abstracts.font(1.7rem, 600);
+    }
+    span {
+      @include abstracts.font(1.3rem, 600);
+    }
+    &::before {
+      display: none;
+      content: "";
+      position: absolute;
+      inset: -7px;
+      background-color: #3e3e3e;
+      border-radius: 4px;
+      z-index: -1;
+    }
+    &:hover::before {
+      display: block;
+    }
+  }
+}
+
+//css tippy 2
+.tippy-box.custom-tippy-btnCreatePlaylist {
+  background-color: abstracts.$background-popup !important;
+  border-radius: 8px;
+  pointer-events: auto !important;
+  .tippy-content {
+    padding: 16px;
+    h4 {
+      @include abstracts.font(1.5rem, 600);
+      margin-bottom: 6px;
+    }
+    p {
+      @include abstracts.font(1.3rem, 500);
+    }
+    .create-playlist-btn {
+      margin-top: 20px;
+      @include abstracts.flex(null, flex-end, null);
+
+      gap: 10px;
+      .not-now,
+      .login {
+        @include abstracts.font(1.2rem, 650);
+        padding: 5px 10px;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+      .not-now {
+        color: abstracts.$text-secondary;
+        background-color: transparent;
+        &:hover {
+          color: #fff;
+        }
+      }
+      .login {
+        background-color: #fff;
+        border-radius: 15px;
+        cursor: pointer;
+        color: #000;
+      }
+    }
+  }
+  .tippy-arrow {
+    color: abstracts.$background-popup;
+    margin-top: -45px;
+  }
+}
