@@ -1,5 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
+import routes from "./routes/index.js";
+import connectDatabase from "../config/DB.js";
 
 dotenv.config();
 
@@ -13,7 +15,13 @@ const PORT = process.env.PORT || 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", (req, res) => {
+//connect database
+connectDatabase();
+
+//define routes
+routes(app);
+
+app.use((req, res) => {
   res.send("404 not found");
 });
 
