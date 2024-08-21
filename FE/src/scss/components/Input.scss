@@ -38,6 +38,12 @@
     cursor: pointer;
     font-size: 18px;
   }
-  // .password-toggle-button i {
-  // }
+  .invalid {
+    outline: 1px solid red;
+    border: none;
+    // &:hover {
+    //   outline: 1px solid red;
+    //   border: none;
+    // }
+  }
 }

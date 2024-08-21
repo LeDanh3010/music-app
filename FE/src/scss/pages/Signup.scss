@@ -101,8 +101,7 @@
   .signup-header {
     padding: 20px 0 30px;
     position: absolute;
-    display: flex;
-    align-items: center;
+    @include abstracts.flex(null, null, center);
     left: 0;
     top: 0;
     width: 100%;
@@ -116,11 +115,8 @@
     }
     .signup-text-wrapper {
       @include abstracts.font(1.6rem);
+      @include abstracts.flex(column, space-between, flex-start);
       gap: 10px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: space-between;
     }
   }
   .signup-form-step {
@@ -136,19 +132,16 @@
     .sign-form-requirement {
       margin: 18px 0 30px;
       text-align: left;
-      display: flex;
-      flex-direction: column;
+      @include abstracts.flex(column);
       gap: 10px;
     }
     .requirement-text {
       @include abstracts.font(1.3rem, 500);
       color: abstracts.$text-secondary;
-      display: flex;
-      flex-direction: column;
+      @include abstracts.flex(column);
       gap: 10px;
       li {
-        display: flex;
-        align-items: center;
+        @include abstracts.flex(null, null, center);
         gap: 5px;
       }
     }
@@ -156,8 +149,7 @@
     /*********************step2*****************************/
     .user-name,
     .date-birth {
-      display: flex;
-      flex-direction: column;
+      @include abstracts.flex(column);
     }
   }
   /*********************step3*****************************/
@@ -187,4 +179,14 @@
   100% {
     width: 50%;
   }
+}
+
+.validInput {
+  position: absolute;
+  left: 0;
+  bottom: 5px;
+  color: #f53412;
+  @include abstracts.flex(null, null, center);
+  gap: 2px;
+  @include abstracts.font(1.3rem, 500);
 }

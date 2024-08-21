@@ -10,22 +10,51 @@ import Button from "../components/Button.jsx";
 import { useState } from "react";
 import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const SignUp = () => {
-  const [date, setDate] = useState("Select Date");
+  const defaultUserData = {
+    Email: "",
+    Password: "",
+    ConfirmPassword: "",
+    Username: "",
+    BirthDate: "",
+    Gender: "",
+  };
+  const isValid = {
+    isEmail: true,
+    isPassword: true,
+    isUserName: true,
+    isBirthDate: true,
+    isGender: true,
+  };
   const [step, setStep] = useState(1);
-  const [userData, setUserData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    name: "",
-    birthDate: "",
-    gender: "",
-  });
+  const [userData, setUserData] = useState(defaultUserData);
+  const [validate, setValidate] = useState(isValid);
   const [requirements, setRequireMents] = useState({
     letter: false,
     numberOrSpecialChar: false,
     length: false,
   });
+  const validateField = (fieldName, value) => {
+    const newValidate = { ...validate };
+    if (typeof value === "string" && !value.trim()) {
+      newValidate["is" + fieldName] = false;
+    } else if (fieldName === "Email" && !emailRegex.test(value)) {
+      newValidate["is" + fieldName] = false;
+    } else {
+      newValidate["is" + fieldName] = true;
+    }
+    setValidate(newValidate);
+  };
+  const handleOnchange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prev) => {
+      const updateData = { ...prev, [name]: value };
+      validateField(name, value);
+      return updateData;
+    });
+  };
 
   const validatePassword = (value) => {
     const letter = /[a-zA-Z]/.test(value);
@@ -37,17 +66,17 @@ const SignUp = () => {
       length,
     });
   };
-  const nextStep = () => {
-    if (
-      requirements.letter &&
-      requirements.numberOrSpecialChar &&
-      requirements.length
-    ) {
-      setStep(step + 1);
-    } else {
-      alert("Please fulfill all password requirements");
-    }
-  };
+  // const nextStep = () => {
+  //   if (
+  //     requirements.letter &&
+  //     requirements.numberOrSpecialChar &&
+  //     requirements.length
+  //   ) {
+  //     setStep(step + 1);
+  //   } else {
+  //     alert("Please fulfill all password requirements");
+  //   }
+  // };
   const turnBack = () => {
     if (step > 0) {
       setStep(step - 1);
@@ -68,11 +97,16 @@ const SignUp = () => {
                 <h1>Sign up to start listening</h1>
                 <div className="signup-form">
                   <Input
+                    name="Email"
+                    value={userData.email}
                     id="Email"
                     label="Email"
                     type="email"
                     placeholder="name@domain.com"
+                    handleOnchange={handleOnchange}
+                    validateField={validate}
                   />
+
                   <Button content="Next" />
                 </div>
                 <div className="signup-social">
