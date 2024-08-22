@@ -188,5 +188,5 @@
   color: #f53412;
   @include abstracts.flex(null, null, center);
   gap: 2px;
-  @include abstracts.font(1.3rem, 500);
+  @include abstracts.font(1.2rem, 400);
 }

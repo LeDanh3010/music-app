@@ -14,10 +14,13 @@ const Input = (props) => {
     name,
     handleOnchange,
     validateField,
+    handleOnBlur,
+    handleKeyDown,
   } = props;
   const inputClassName = `${
     id === "Email" ? "form-input email" : "form-input"
   } ${!validateField?.isEmail ? "invalid" : ""}`;
+
   return (
     <>
       <label className="form-label" htmlFor={id}>
@@ -33,6 +36,8 @@ const Input = (props) => {
           placeholder={placeholder}
           required
           onChange={(e) => handleOnchange(e)}
+          onBlur={(e) => handleOnBlur(e)}
+          onKeyDown={(e) => handleKeyDown(e)}
         />
         {id === "Password" ? (
           <span className="password-toggle" onClick={onPasswordToggle}>
@@ -42,7 +47,7 @@ const Input = (props) => {
           ""
         )}
 
-        {!validateField?.isEmail && (
+        {!validateField?.isEmail && id !== "Password" && (
           <span className="validInput">
             <MdErrorOutline />
             {name} is invalid. Please fill the field valid
@@ -62,6 +67,8 @@ Input.propTypes = {
   onPasswordToggle: PropTypes.func,
   handleOnchange: PropTypes.func,
   validateField: PropTypes.object,
+  handleOnBlur: PropTypes.func,
+  handleKeyDown: PropTypes.func,
 };
 
 export default Input;

@@ -21,41 +21,48 @@ const SignUp = () => {
     BirthDate: "",
     Gender: "",
   };
-  const isValid = {
+  const defaultIsValid = {
     isEmail: true,
     isPassword: true,
     isUserName: true,
     isBirthDate: true,
     isGender: true,
   };
-  const [step, setStep] = useState(1);
+
+  const [step, setStep] = useState(0);
   const [userData, setUserData] = useState(defaultUserData);
-  const [validate, setValidate] = useState(isValid);
+  const [validate, setValidate] = useState(defaultIsValid);
   const [requirements, setRequireMents] = useState({
     letter: false,
     numberOrSpecialChar: false,
     length: false,
   });
   const validateField = (fieldName, value) => {
+    let isValid = true;
     const newValidate = { ...validate };
     if (typeof value === "string" && !value.trim()) {
       newValidate["is" + fieldName] = false;
+      isValid = false;
     } else if (fieldName === "Email" && !emailRegex.test(value)) {
       newValidate["is" + fieldName] = false;
+      isValid = false;
     } else {
       newValidate["is" + fieldName] = true;
     }
     setValidate(newValidate);
+    return isValid;
   };
   const handleOnchange = (e) => {
     const { name, value } = e.target;
-    setUserData((prev) => {
-      const updateData = { ...prev, [name]: value };
-      validateField(name, value);
-      return updateData;
-    });
+    setUserData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
-
+  const handleOnBlur = (e) => {
+    const { name, value } = e.target;
+    validateField(name, value);
+  };
   const validatePassword = (value) => {
     const letter = /[a-zA-Z]/.test(value);
     const numberOrSpecialChar = /[0-9!@#$%^&*]/.test(value);
@@ -65,6 +72,17 @@ const SignUp = () => {
       numberOrSpecialChar,
       length,
     });
+  };
+  const handleOnClick = () => {
+    const isValid = validateField("Email", userData.Email);
+    if (isValid) {
+      setStep(step + 1);
+    }
+  };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleOnClick();
+    }
   };
   // const nextStep = () => {
   //   if (
@@ -98,16 +116,17 @@ const SignUp = () => {
                 <div className="signup-form">
                   <Input
                     name="Email"
-                    value={userData.email}
+                    value={userData.Email}
                     id="Email"
                     label="Email"
                     type="email"
                     placeholder="name@domain.com"
                     handleOnchange={handleOnchange}
                     validateField={validate}
+                    handleOnBlur={handleOnBlur}
+                    handleKeyDown={handleKeyDown}
                   />
-
-                  <Button content="Next" />
+                  <Button content="Next" handleOnClick={handleOnClick} />
                 </div>
                 <div className="signup-social">
                   <div className="divider-top">or</div>
