@@ -5,18 +5,18 @@ import SocialLink from "../components/Social_link.jsx";
 import Input from "../components/Input.jsx";
 import { Link } from "react-router-dom";
 import FooterPrivacyPolicy from "../components/FooterPrivacyPolicy.jsx";
-
+import { motion } from "framer-motion";
 import Button from "../components/Button.jsx";
 import { useState } from "react";
-import { FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const letter = /[a-zA-Z]/;
+const numberOrSpecialChar = /[0-9!@#$%^&*]/;
 
 const SignUp = () => {
   const defaultUserData = {
     Email: "",
     Password: "",
-    ConfirmPassword: "",
     Username: "",
     BirthDate: "",
     Gender: "",
@@ -28,14 +28,24 @@ const SignUp = () => {
     isBirthDate: true,
     isGender: true,
   };
-
-  const [step, setStep] = useState(0);
+  const totalSteps = 3;
+  const [currentStep, setCurrentStep] = useState(0);
+  const progress = (currentStep / totalSteps) * 100;
   const [userData, setUserData] = useState(defaultUserData);
   const [validate, setValidate] = useState(defaultIsValid);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const handlePasswordToggle = () => {
+    setPasswordVisible(!passwordVisible);
+  };
   const [requirements, setRequireMents] = useState({
     letter: false,
     numberOrSpecialChar: false,
     length: false,
+  });
+  const [validRequirement, setValidRequirement] = useState({
+    isLetter: true,
+    isNumberOrSpecialChar: true,
+    isLength: true,
   });
   const validateField = (fieldName, value) => {
     let isValid = true;
@@ -52,58 +62,80 @@ const SignUp = () => {
     setValidate(newValidate);
     return isValid;
   };
+  const validatePasswordToText = (value) => {
+    setValidRequirement({
+      isLetter: letter.test(value),
+      isNumberOrSpecialChar: numberOrSpecialChar.test(value),
+      isLength: value.length >= 10,
+    });
+  };
+  const validatePassword = (value) => {
+    setRequireMents({
+      letter: letter.test(value),
+      numberOrSpecialChar: numberOrSpecialChar.test(value),
+      length: value.length >= 10,
+    });
+  };
   const handleOnchange = (e) => {
     const { name, value } = e.target;
-    setUserData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    if (name === "Email") {
+      setUserData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    } else {
+      setUserData((prev) => {
+        const updateState = { ...prev, [name]: value };
+        validatePassword(value);
+        validatePasswordToText(value);
+        return updateState;
+      });
+    }
   };
   const handleOnBlur = (e) => {
     const { name, value } = e.target;
+    validatePasswordToText(value);
     validateField(name, value);
   };
-  const validatePassword = (value) => {
-    const letter = /[a-zA-Z]/.test(value);
-    const numberOrSpecialChar = /[0-9!@#$%^&*]/.test(value);
-    const length = value.length >= 10;
-    setRequireMents({
-      letter,
-      numberOrSpecialChar,
-      length,
-    });
-  };
-  const handleOnClick = () => {
-    const isValid = validateField("Email", userData.Email);
-    if (isValid) {
-      setStep(step + 1);
+
+  const handleOnClick = (nameBtn, value) => {
+    switch (nameBtn) {
+      case "Email": {
+        const isValid = validateField("Email", userData.Email);
+        if (isValid) {
+          setCurrentStep(currentStep + 1);
+        }
+        break;
+      }
+      case "Password": {
+        validatePasswordToText(value);
+        if (
+          requirements.letter &&
+          requirements.numberOrSpecialChar &&
+          requirements.length
+        ) {
+          setCurrentStep(currentStep + 1);
+        }
+      }
     }
   };
   const handleKeyDown = (e) => {
+    const { name, value } = e.target;
     if (e.key === "Enter") {
-      handleOnClick();
+      handleOnClick(name, value);
     }
   };
-  // const nextStep = () => {
-  //   if (
-  //     requirements.letter &&
-  //     requirements.numberOrSpecialChar &&
-  //     requirements.length
-  //   ) {
-  //     setStep(step + 1);
-  //   } else {
-  //     alert("Please fulfill all password requirements");
-  //   }
-  // };
+
   const turnBack = () => {
-    if (step > 0) {
-      setStep(step - 1);
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
     }
   };
+
   return (
     <div className="signup">
       <div className="signup-wrapper">
-        {step === 0 && (
+        {currentStep === 0 && (
           <>
             <header>
               <Link to="/">
@@ -126,7 +158,11 @@ const SignUp = () => {
                     handleOnBlur={handleOnBlur}
                     handleKeyDown={handleKeyDown}
                   />
-                  <Button content="Next" handleOnClick={handleOnClick} />
+                  <Button
+                    content="Next"
+                    nameBtn="Email"
+                    handleOnClick={handleOnClick}
+                  />
                 </div>
                 <div className="signup-social">
                   <div className="divider-top">or</div>
@@ -141,7 +177,7 @@ const SignUp = () => {
             </section>
           </>
         )}
-        {step === 1 && (
+        {currentStep === 1 && (
           <>
             <header>
               <Link to="/">
@@ -152,7 +188,12 @@ const SignUp = () => {
             <section>
               <div className="signup-body">
                 <div className="progress-bar-wrapper">
-                  <div className="progress-bar"></div>
+                  <motion.div
+                    className="progress-bar"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progress}%` }}
+                    transition={{ duration: 0.1, ease: "linear" }}
+                  ></motion.div>
                 </div>
                 <div className="signup-header">
                   <div onClick={() => turnBack()}>
@@ -165,33 +206,83 @@ const SignUp = () => {
                 </div>
                 <div className="signup-form-step">
                   <div className="signup-form-password">
-                    <Input id="Password" label="Password" type="password" />
+                    <Input
+                      name="Password"
+                      value={userData.Password}
+                      id="Password"
+                      label="Password"
+                      type={!passwordVisible ? "password" : "text"}
+                      onPasswordToggle={handlePasswordToggle}
+                      handleOnchange={handleOnchange}
+                      handleOnBlur={handleOnBlur}
+                      handleKeyDown={handleKeyDown}
+                    />
                   </div>
                   <div className="sign-form-requirement">
-                    <span className="requirement-header">
+                    <span className="requirement-header ">
                       Your password must contain at least
                     </span>
                     <ul className="requirement-text">
-                      <li>
-                        <FaRegCircle />1 letter
+                      <li className="validPassword">
+                        <span
+                          className={requirements.letter ? "dot valid" : "dot"}
+                        ></span>
+                        <span
+                          className={
+                            !validRequirement.isLetter
+                              ? "validText invalid"
+                              : "validText"
+                          }
+                        >
+                          1 letter
+                        </span>
                       </li>
-                      <li>
-                        <FaRegCircle />1 number or special character (example: #
-                        ? ! &)
+                      <li className="validPassword">
+                        <span
+                          className={
+                            requirements.numberOrSpecialChar
+                              ? "dot valid"
+                              : "dot"
+                          }
+                        ></span>
+                        <span
+                          className={
+                            !validRequirement.isNumberOrSpecialChar
+                              ? "validText invalid"
+                              : "validText"
+                          }
+                        >
+                          1 number or special character (example: # ? ! &)
+                        </span>
                       </li>
-                      <li>
-                        <FaRegCircle />
-                        10 characters
+                      <li className="validPassword">
+                        <span
+                          className={requirements.length ? "dot valid" : "dot"}
+                        ></span>
+                        <span
+                          className={
+                            !validRequirement.isLength
+                              ? "validText invalid"
+                              : "validText"
+                          }
+                        >
+                          10 characters
+                        </span>
                       </li>
                     </ul>
                   </div>
                 </div>
-                <Button content="Next" />
+                <Button
+                  content="Next"
+                  nameBtn="Password"
+                  handleOnClick={handleOnClick}
+                />
               </div>
             </section>
           </>
         )}
-        {step === 2 && (
+
+        {currentStep === 2 && (
           <>
             <header>
               <Link to="/">
@@ -202,7 +293,12 @@ const SignUp = () => {
             <section>
               <div className="signup-body">
                 <div className="progress-bar-wrapper">
-                  <div className="progress-bar"></div>
+                  <motion.div
+                    className="progress-bar"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progress}%` }}
+                    transition={{ duration: 0.5, ease: "linear" }}
+                  ></motion.div>
                 </div>
                 <div className="signup-header">
                   <div onClick={() => turnBack()}>
@@ -226,7 +322,7 @@ const SignUp = () => {
             </section>
           </>
         )}
-        {step === 3 && (
+        {currentStep === 3 && (
           <>
             <header>
               <Link to="/">
@@ -237,7 +333,12 @@ const SignUp = () => {
             <section>
               <div className="signup-body">
                 <div className="progress-bar-wrapper">
-                  <div className="progress-bar"></div>
+                  <motion.div
+                    className="progress-bar"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${progress}%` }}
+                    transition={{ duration: 0.5, ease: "linear" }}
+                  ></motion.div>
                 </div>
                 <div className="signup-header">
                   <div onClick={() => turnBack()}>

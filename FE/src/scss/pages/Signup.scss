@@ -95,7 +95,6 @@
       position: absolute;
       height: 100%;
       background-color: abstracts.$button-color;
-      animation: progress-animation 2s linear;
     }
   }
   .signup-header {
@@ -137,7 +136,7 @@
     }
     .requirement-text {
       @include abstracts.font(1.3rem, 500);
-      color: abstracts.$text-secondary;
+
       @include abstracts.flex(column);
       gap: 10px;
       li {
@@ -172,15 +171,7 @@
   }
 }
 
-@keyframes progress-animation {
-  0% {
-    width: 0%;
-  }
-  100% {
-    width: 50%;
-  }
-}
-
+//valid Input
 .validInput {
   position: absolute;
   left: 0;
@@ -189,4 +180,34 @@
   @include abstracts.flex(null, null, center);
   gap: 2px;
   @include abstracts.font(1.2rem, 400);
+}
+
+//valid password
+.validPassword {
+  position: relative;
+  .dot {
+    @include abstracts.flex(null, center, center);
+    position: relative;
+    height: 10px;
+    width: 10px;
+    background-color: abstracts.$text-secondary;
+    border-radius: 50%;
+    &::before {
+      position: absolute;
+      content: "";
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background-color: #121212;
+    }
+    &.valid::before {
+      background-color: #1ed760;
+    }
+  }
+  .validText {
+    color: abstracts.$text-secondary;
+    &.invalid {
+      color: #f53412;
+    }
+  }
 }

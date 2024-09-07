@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import "../scss/components/Button.scss";
 
-const Button = ({ content, handleOnClick }) => {
+const Button = ({ content, handleOnClick, nameBtn }) => {
   return (
     <button
       className="btn-submit"
       type="submit"
       onClick={() => {
-        handleOnClick();
+        handleOnClick(nameBtn);
       }}
     >
       {content}

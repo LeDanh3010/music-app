@@ -20,7 +20,8 @@ const Input = (props) => {
   const inputClassName = `${
     id === "Email" ? "form-input email" : "form-input"
   } ${!validateField?.isEmail ? "invalid" : ""}`;
-
+  const isEmailInvalid = !validateField?.isEmail;
+  const isPasswordInvalid = !validateField?.isPassword && id !== "Password";
   return (
     <>
       <label className="form-label" htmlFor={id}>
@@ -47,7 +48,7 @@ const Input = (props) => {
           ""
         )}
 
-        {!validateField?.isEmail && id !== "Password" && (
+        {(isEmailInvalid || isPasswordInvalid) && (
           <span className="validInput">
             <MdErrorOutline />
             {name} is invalid. Please fill the field valid
