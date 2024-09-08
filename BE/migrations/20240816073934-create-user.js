@@ -23,6 +23,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      birthDate: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       isAdmin: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
