@@ -13,15 +13,26 @@ const Input = (props) => {
     value,
     name,
     handleOnchange,
-    validateField,
+    validate,
     handleOnBlur,
     handleKeyDown,
   } = props;
   const inputClassName = `${
-    id === "Email" ? "form-input email" : "form-input"
-  } ${!validateField?.isEmail ? "invalid" : ""}`;
-  const isEmailInvalid = !validateField?.isEmail;
-  const isPasswordInvalid = !validateField?.isPassword && id !== "Password";
+    id === "Email" || id === "Username" || id === "BirthDate"
+      ? "form-input textInvalid-space"
+      : "form-input"
+  }`;
+  const renderError = (fieldId) => {
+    if (validate?.[`is${fieldId}`] === false) {
+      return (
+        <span className="validInput">
+          <MdErrorOutline />
+          {name} is invalid. Please fill the field valid
+        </span>
+      );
+    }
+    return null;
+  };
   return (
     <>
       <label className="form-label" htmlFor={id}>
@@ -47,13 +58,7 @@ const Input = (props) => {
         ) : (
           ""
         )}
-
-        {(isEmailInvalid || isPasswordInvalid) && (
-          <span className="validInput">
-            <MdErrorOutline />
-            {name} is invalid. Please fill the field valid
-          </span>
-        )}
+        {renderError(id)}
       </div>
     </>
   );
@@ -67,7 +72,7 @@ Input.propTypes = {
   value: PropTypes.string,
   onPasswordToggle: PropTypes.func,
   handleOnchange: PropTypes.func,
-  validateField: PropTypes.object,
+  validate: PropTypes.object,
   handleOnBlur: PropTypes.func,
   handleKeyDown: PropTypes.func,
 };

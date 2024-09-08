@@ -19,7 +19,7 @@
       @include abstracts.font(1.4rem, 600);
     }
   }
-  .email {
+  .textInvalid-space {
     margin-bottom: 30px;
   }
 
@@ -37,13 +37,5 @@
     transform: translateY(-50%);
     cursor: pointer;
     font-size: 18px;
-  }
-  .invalid {
-    // outline: 1px solid red;
-    // border: none;
-    // &:hover {
-    //   outline: 1px solid red;
-    //   border: none;
-    // }
   }
 }

@@ -8,6 +8,7 @@ import FooterPrivacyPolicy from "../components/FooterPrivacyPolicy.jsx";
 import { motion } from "framer-motion";
 import Button from "../components/Button.jsx";
 import { useState } from "react";
+import { MdErrorOutline } from "react-icons/md";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const letter = /[a-zA-Z]/;
@@ -19,16 +20,16 @@ const SignUp = () => {
     Password: "",
     Username: "",
     BirthDate: "",
-    Gender: "",
   };
   const defaultIsValid = {
     isEmail: true,
-    isPassword: true,
-    isUserName: true,
+    isUsername: true,
     isBirthDate: true,
-    isGender: true,
+    // isPassword: true,
   };
   const totalSteps = 3;
+  const [showErr, setShowErr] = useState(false);
+  const [isChecked, setChecked] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const progress = (currentStep / totalSteps) * 100;
   const [userData, setUserData] = useState(defaultUserData);
@@ -47,20 +48,44 @@ const SignUp = () => {
     isNumberOrSpecialChar: true,
     isLength: true,
   });
+
   const validateField = (fieldName, value) => {
     let isValid = true;
-    const newValidate = { ...validate };
     if (typeof value === "string" && !value.trim()) {
-      newValidate["is" + fieldName] = false;
+      setValidate((prev) => ({
+        ...prev,
+        ["is" + fieldName]: false,
+      }));
       isValid = false;
     } else if (fieldName === "Email" && !emailRegex.test(value)) {
-      newValidate["is" + fieldName] = false;
+      setValidate((prev) => ({
+        ...prev,
+        ["is" + fieldName]: false,
+      }));
       isValid = false;
     } else {
-      newValidate["is" + fieldName] = true;
+      setValidate((prev) => ({
+        ...prev,
+        ["is" + fieldName]: true,
+      }));
+      isValid = true;
     }
-    setValidate(newValidate);
     return isValid;
+    //  setValidate((prevValidate) => {
+    //   const newValidate = { ...prevValidate };
+    //   if (typeof value === "string" && !value.trim()) {
+    //     newValidate["is" + fieldName] = false;
+    //     isValid = false;
+    //     console.log(isValid);
+    //   } else if (fieldName === "Email" && !emailRegex.test(value)) {
+    //     newValidate["is" + fieldName] = false;
+    //     isValid = false;
+    //   } else {
+    //     newValidate["is" + fieldName] = true;
+    //   }
+    //   console.log(newValidate);
+    //   return newValidate;
+    // })
   };
   const validatePasswordToText = (value) => {
     setValidRequirement({
@@ -78,7 +103,7 @@ const SignUp = () => {
   };
   const handleOnchange = (e) => {
     const { name, value } = e.target;
-    if (name === "Email") {
+    if (name === "Email" || name === "Username") {
       setUserData((prev) => ({
         ...prev,
         [name]: value,
@@ -94,11 +119,15 @@ const SignUp = () => {
   };
   const handleOnBlur = (e) => {
     const { name, value } = e.target;
-    validatePasswordToText(value);
-    validateField(name, value);
+    if (name === "Password") {
+      validatePasswordToText(value);
+    } else {
+      validateField(name, value);
+    }
   };
 
-  const handleOnClick = (nameBtn, value) => {
+  const handleOnClick = (nameBtn) => {
+    console.log(nameBtn);
     switch (nameBtn) {
       case "Email": {
         const isValid = validateField("Email", userData.Email);
@@ -108,7 +137,6 @@ const SignUp = () => {
         break;
       }
       case "Password": {
-        validatePasswordToText(value);
         if (
           requirements.letter &&
           requirements.numberOrSpecialChar &&
@@ -116,20 +144,38 @@ const SignUp = () => {
         ) {
           setCurrentStep(currentStep + 1);
         }
+        break;
+      }
+
+      case "BirthDate":
+      case "UserAndBirth": {
+        const isUsernameValid = validateField("Username", userData.Username);
+        const isBirthDateValid = validateField("BirthDate", userData.BirthDate);
+        if (isUsernameValid && isBirthDateValid) {
+          setCurrentStep(currentStep + 1);
+        }
+        break;
+      }
+      case "SignUp": {
+        console.log(isChecked);
+        if (!isChecked) {
+          setShowErr(true);
+        } else {
+          setShowErr(false);
+          console.log(userData);
+        }
       }
     }
   };
   const handleKeyDown = (e) => {
-    const { name, value } = e.target;
     if (e.key === "Enter") {
-      handleOnClick(name, value);
+      console.log(e.target.name);
+      handleOnClick(e.target.name);
     }
   };
 
   const turnBack = () => {
-    if (currentStep > 0) {
-      setCurrentStep(currentStep - 1);
-    }
+    currentStep > 0 && setCurrentStep(currentStep - 1);
   };
 
   return (
@@ -154,7 +200,7 @@ const SignUp = () => {
                     type="email"
                     placeholder="name@domain.com"
                     handleOnchange={handleOnchange}
-                    validateField={validate}
+                    validate={validate}
                     handleOnBlur={handleOnBlur}
                     handleKeyDown={handleKeyDown}
                   />
@@ -311,13 +357,37 @@ const SignUp = () => {
                 </div>
                 <div className="signup-form-step">
                   <div className="user-name">
-                    <Input id="username" label="Username" type="text" />
+                    <Input
+                      id="Username"
+                      label="Username"
+                      type="text"
+                      name="Username"
+                      value={userData.Username}
+                      handleOnchange={handleOnchange}
+                      validate={validate}
+                      handleOnBlur={handleOnBlur}
+                      handleKeyDown={handleKeyDown}
+                    />
                   </div>
                   <div className="date-birth">
-                    <Input id="dateOfBirth" label="Date of birth" type="date" />
+                    <Input
+                      value={userData.BirthDate}
+                      id="BirthDate"
+                      label="BirthDate"
+                      type="date"
+                      name="BirthDate"
+                      validate={validate}
+                      handleOnBlur={handleOnBlur}
+                      handleOnchange={handleOnchange}
+                      handleKeyDown={handleKeyDown}
+                    />
                   </div>
                 </div>
-                <Button content="Next" />
+                <Button
+                  nameBtn="UserAndBirth"
+                  handleOnClick={handleOnClick}
+                  content="Next"
+                />
               </div>
             </section>
           </>
@@ -351,27 +421,52 @@ const SignUp = () => {
                 </div>
                 <div className="signup-form-step">
                   <div className="term-condition">
-                    <input type="checkbox" id="agree1" />
-                    <label htmlFor="agree1">
-                      I would prefer not to receive marketing messages from
-                      Spotify
+                    <label className="condition-text">
+                      <input type="checkbox" />
+                      <span>
+                        I would prefer not to receive marketing messages from
+                        Spotify
+                      </span>
                     </label>
                   </div>
                   <div className="term-condition">
-                    <input type="checkbox" id="agree2" />
-                    <label htmlFor="agree2">
-                      Share my registration data with Spotify&apos;s content
-                      providers for marketing purposes.
+                    <label className="condition-text">
+                      <input className="checkbox-condition" type="checkbox" />
+                      <span>
+                        Share my registration data with Spotify&apos;s content
+                        providers for marketing purposes.
+                      </span>
                     </label>
                   </div>
                   <div className="term-condition">
-                    <input type="checkbox" id="agree3" />
-                    <label htmlFor="agree3">
-                      I agree to the Spotify Terms and Conditions of Use.
+                    <label className="condition-text">
+                      <input
+                        name="SignUp"
+                        className="checkbox-condition"
+                        type="checkbox"
+                        checked={isChecked}
+                        onKeyDown={handleKeyDown}
+                        onChange={() => {
+                          setChecked(!isChecked);
+                        }}
+                      />
+                      <span>
+                        I agree to the Spotify Terms and Conditions of Use.
+                      </span>
                     </label>
+                    {showErr && (
+                      <span className="validInput terms">
+                        <MdErrorOutline />
+                        Please agree the terms and conditions
+                      </span>
+                    )}
                   </div>
                 </div>
-                <Button content="Sign Up" />
+                <Button
+                  handleOnClick={handleOnClick}
+                  nameBtn="SignUp"
+                  content="Sign Up"
+                />
               </div>
             </section>
           </>
