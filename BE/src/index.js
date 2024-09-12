@@ -1,7 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import routes from "./routes/index.js";
-import connectDatabase from "../config/DB.js";
+import connectDatabase from "./config/DB.js";
+import Cors from "./config/CORS.js";
 
 dotenv.config();
 
@@ -17,6 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 
 //connect database
 connectDatabase();
+
+//Cors
+Cors(app);
 
 //define routes
 routes(app);

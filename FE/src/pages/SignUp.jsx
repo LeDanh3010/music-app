@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import Button from "../components/Button.jsx";
 import { useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
+import { userService } from "../services/userService.jsx";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const letter = /[a-zA-Z]/;
@@ -35,6 +36,7 @@ const SignUp = () => {
   const [userData, setUserData] = useState(defaultUserData);
   const [validate, setValidate] = useState(defaultIsValid);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [emailExist, setEmailExist] = useState(false);
   const handlePasswordToggle = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -71,21 +73,6 @@ const SignUp = () => {
       isValid = true;
     }
     return isValid;
-    //  setValidate((prevValidate) => {
-    //   const newValidate = { ...prevValidate };
-    //   if (typeof value === "string" && !value.trim()) {
-    //     newValidate["is" + fieldName] = false;
-    //     isValid = false;
-    //     console.log(isValid);
-    //   } else if (fieldName === "Email" && !emailRegex.test(value)) {
-    //     newValidate["is" + fieldName] = false;
-    //     isValid = false;
-    //   } else {
-    //     newValidate["is" + fieldName] = true;
-    //   }
-    //   console.log(newValidate);
-    //   return newValidate;
-    // })
   };
   const validatePasswordToText = (value) => {
     setValidRequirement({
@@ -126,13 +113,16 @@ const SignUp = () => {
     }
   };
 
-  const handleOnClick = (nameBtn) => {
-    console.log(nameBtn);
+  const handleOnClick = async (nameBtn) => {
     switch (nameBtn) {
       case "Email": {
         const isValid = validateField("Email", userData.Email);
-        if (isValid) {
+        const checkEmailExist = await userService.findUsername(userData.Email);
+        if (isValid && Number(checkEmailExist.DE) === 0) {
           setCurrentStep(currentStep + 1);
+          setEmailExist(false);
+        } else {
+          setEmailExist(true);
         }
         break;
       }
@@ -163,6 +153,13 @@ const SignUp = () => {
         } else {
           setShowErr(false);
           console.log(userData);
+          const res = await userService.create({
+            email: userData.Email,
+            username: userData.Username,
+            password: userData.Password,
+            birthDate: userData.BirthDate,
+          });
+          console.log(res);
         }
       }
     }
@@ -201,6 +198,7 @@ const SignUp = () => {
                     placeholder="name@domain.com"
                     handleOnchange={handleOnchange}
                     validate={validate}
+                    emailExist={emailExist}
                     handleOnBlur={handleOnBlur}
                     handleKeyDown={handleKeyDown}
                   />

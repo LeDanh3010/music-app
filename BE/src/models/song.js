@@ -16,11 +16,13 @@ module.exports = (sequelize, DataTypes) => {
       Song.belongsToMany(models.User, {
         through: "UserFavorite_Song",
         foreignKey: "songId",
+        as: "favoriteUsers",
       });
 
       Song.belongsToMany(models.Genre, {
         through: "Song_Genre",
         foreignKey: "songId",
+        as: "genres",
       });
 
       Song.belongsTo(models.Album, {

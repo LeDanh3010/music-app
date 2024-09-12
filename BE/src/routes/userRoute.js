@@ -1,5 +1,5 @@
 import express from "express";
-import { userController } from "../controllers/userController";
+import { userController } from "../controllers/userController.js";
 
 const api = express.Router();
 
@@ -7,5 +7,9 @@ const api = express.Router();
 
 //Site Page
 api.post("/login", userController.login);
+//register
+api.post("/register", userController.register);
+//check user
+api.get("/checkUser", userController.checkUser);
 
 export default api;

@@ -1,4 +1,4 @@
-import userRoute from "./userRoute";
+import userRoute from "./userRoute.js";
 
 const route = (app) => {
   // Define routes

@@ -14,6 +14,7 @@ const Input = (props) => {
     name,
     handleOnchange,
     validate,
+    emailExist,
     handleOnBlur,
     handleKeyDown,
   } = props;
@@ -28,6 +29,14 @@ const Input = (props) => {
         <span className="validInput">
           <MdErrorOutline />
           {name} is invalid. Please fill the field valid
+        </span>
+      );
+    } else if (emailExist) {
+      console.log(emailExist);
+      return (
+        <span className="validInput">
+          <MdErrorOutline />
+          {name} is already existed
         </span>
       );
     }
@@ -75,6 +84,7 @@ Input.propTypes = {
   validate: PropTypes.object,
   handleOnBlur: PropTypes.func,
   handleKeyDown: PropTypes.func,
+  emailExist: PropTypes.bool,
 };
 
 export default Input;
