@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import db from "../models/index.js";
 
 class UserApiService {
@@ -6,29 +7,44 @@ class UserApiService {
     console.log("User logged in");
   }
   //define register
-  register(data) {
-    console.log("User registered");
+  async register(data) {
+    try {
+      const user = await db.User.create({
+        data,
+      });
+      console.log("user", user);
+    } catch (e) {
+      console.error("Error in register:", e);
+      return {
+        message: "Some thing wrong in userApiService",
+      };
+    }
   }
   //check email
-  async checkEmail(data) {
+  async checkEmailOrUsername(data) {
     try {
-      const checkEmail = await db.User.findOne({
+      const existingUser = await db.User.findOne({
         where: {
-          email: data.email,
+          [Op.or]: [
+            { email: data.emailOrUserName },
+            { username: data.emailOrUserName },
+          ],
         },
       });
-      if (checkEmail) {
+
+      if (existingUser) {
         return {
-          message: "Email already exists",
+          message: "Email or username already exists",
           DE: "1",
         };
       } else {
         return {
-          message: "Email valid",
+          message: "User valid",
           DE: "0",
         };
       }
     } catch (e) {
+      console.error("Error in checkEmail:", e);
       return {
         message: "Some thing wrong in userApiService",
       };

@@ -10,6 +10,6 @@ api.post("/login", userController.login);
 //register
 api.post("/register", userController.register);
 //check user
-api.get("/checkUser", userController.checkUser);
+api.post("/checkUser", userController.checkUser);
 
 export default api;

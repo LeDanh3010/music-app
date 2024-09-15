@@ -14,7 +14,7 @@ const Input = (props) => {
     name,
     handleOnchange,
     validate,
-    emailExist,
+    userExisted,
     handleOnBlur,
     handleKeyDown,
   } = props;
@@ -31,8 +31,7 @@ const Input = (props) => {
           {name} is invalid. Please fill the field valid
         </span>
       );
-    } else if (emailExist) {
-      console.log(emailExist);
+    } else if (userExisted) {
       return (
         <span className="validInput">
           <MdErrorOutline />

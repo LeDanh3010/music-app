@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 //define port
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8360;
 
 // parse application/x-www-form-urlencoded
 app.use(express.json());

@@ -14,9 +14,9 @@ class UserService {
       };
     }
   }
-  findUsername(email) {
+  findUsernameOrEmail(emailOrUserName) {
     try {
-      return axios.get(`/checkUser?email=${email}`);
+      return axios.post("/checkUser", emailOrUserName);
     } catch (e) {
       return {
         message: "Some thing wrong in userService",

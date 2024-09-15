@@ -36,7 +36,7 @@ const SignUp = () => {
   const [userData, setUserData] = useState(defaultUserData);
   const [validate, setValidate] = useState(defaultIsValid);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [emailExist, setEmailExist] = useState(false);
+  const [userExisted, setUserExisted] = useState(false);
   const handlePasswordToggle = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -117,12 +117,14 @@ const SignUp = () => {
     switch (nameBtn) {
       case "Email": {
         const isValid = validateField("Email", userData.Email);
-        const checkEmailExist = await userService.findUsername(userData.Email);
+        const checkEmailExist = await userService.findUsernameOrEmail({
+          emailOrUserName: userData.Email,
+        });
         if (isValid && Number(checkEmailExist.DE) === 0) {
           setCurrentStep(currentStep + 1);
-          setEmailExist(false);
+          setUserExisted(false);
         } else {
-          setEmailExist(true);
+          setUserExisted(true);
         }
         break;
       }
@@ -139,10 +141,21 @@ const SignUp = () => {
 
       case "BirthDate":
       case "UserAndBirth": {
+        const checkUsernameExist = await userService.findUsernameOrEmail({
+          emailOrUserName: userData.Username,
+        });
+        console.log(checkUsernameExist);
         const isUsernameValid = validateField("Username", userData.Username);
         const isBirthDateValid = validateField("BirthDate", userData.BirthDate);
-        if (isUsernameValid && isBirthDateValid) {
+        if (
+          isUsernameValid &&
+          isBirthDateValid &&
+          Number(checkUsernameExist.DE) === 0
+        ) {
           setCurrentStep(currentStep + 1);
+          setUserExisted(false);
+        } else {
+          setUserExisted(true);
         }
         break;
       }
@@ -198,7 +211,7 @@ const SignUp = () => {
                     placeholder="name@domain.com"
                     handleOnchange={handleOnchange}
                     validate={validate}
-                    emailExist={emailExist}
+                    userExisted={userExisted}
                     handleOnBlur={handleOnBlur}
                     handleKeyDown={handleKeyDown}
                   />
