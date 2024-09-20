@@ -6,7 +6,6 @@ class UserService {
   }
   create(data) {
     try {
-      console.log(data);
       return axios.post("/register", data);
     } catch (e) {
       return {

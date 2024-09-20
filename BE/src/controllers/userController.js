@@ -8,9 +8,12 @@ class UserController {
   }
   // Define register method here
   async register(req, res) {
+    console.log("req", req.body);
     const registerService = await userApiService.register(req.body);
-    console.log(registerService);
-    res.status(200).json({ message: "Registered successfully" });
+    return res.status(200).json({
+      message: registerService.message,
+      DE: registerService.DE,
+    });
   }
   //Define check whether the user exist or not
   async checkUser(req, res) {

@@ -3,7 +3,6 @@ import "tippy.js/dist/tippy.css";
 import { CiMusicNote1 } from "react-icons/ci";
 import { FaPlus } from "react-icons/fa";
 import { useState } from "react";
-import PropTypes from "prop-types";
 import "../scss/lib/Tippys.scss";
 
 // Tooltip content components
@@ -13,9 +12,7 @@ const PlusModalContent = ({ onCreateNewPlayList }) => (
     <span onClick={onCreateNewPlayList}>Create a new playlist</span>
   </div>
 );
-PlusModalContent.propTypes = {
-  onCreateNewPlayList: PropTypes.func.isRequired,
-};
+
 const CreateNewPlayList = ({ onClose }) => (
   <div className="create-playlist-box">
     <h4>Create a playlist</h4>
@@ -28,9 +25,7 @@ const CreateNewPlayList = ({ onClose }) => (
     </div>
   </div>
 );
-CreateNewPlayList.propTypes = {
-  onClose: PropTypes.func.isRequired,
-};
+
 const TippyPack = ({ tippyType }) => {
   const [visible, setVisible] = useState(false);
   const [activeToolTip, setActiveToolTip] = useState(null);
@@ -86,10 +81,6 @@ const TippyPack = ({ tippyType }) => {
       )}
     </Tippy>
   );
-};
-
-TippyPack.propTypes = {
-  tippyType: PropTypes.string,
 };
 
 export default TippyPack;

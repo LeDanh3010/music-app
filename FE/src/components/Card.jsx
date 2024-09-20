@@ -1,5 +1,5 @@
 import { RiPlayMiniFill } from "react-icons/ri";
-import PropTypes from "prop-types";
+
 import "../scss/components/Card.scss";
 
 const Card = ({
@@ -56,15 +56,4 @@ const Card = ({
   );
 };
 
-Card.propTypes = {
-  title: PropTypes.string,
-  key: PropTypes.string,
-  name: PropTypes.string,
-  musicName: PropTypes.string,
-  artist: PropTypes.string,
-  image_url: PropTypes.string,
-  type: PropTypes.string,
-  typePage: PropTypes.string,
-  titleName: PropTypes.string,
-};
 export default Card;

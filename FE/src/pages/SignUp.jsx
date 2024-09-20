@@ -3,7 +3,7 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import "../scss/pages/Signup.scss";
 import SocialLink from "../components/Social_link.jsx";
 import Input from "../components/Input.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FooterPrivacyPolicy from "../components/FooterPrivacyPolicy.jsx";
 import { motion } from "framer-motion";
 import Button from "../components/Button.jsx";
@@ -16,6 +16,7 @@ const letter = /[a-zA-Z]/;
 const numberOrSpecialChar = /[0-9!@#$%^&*]/;
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const defaultUserData = {
     Email: "",
     Password: "",
@@ -26,7 +27,7 @@ const SignUp = () => {
     isEmail: true,
     isUsername: true,
     isBirthDate: true,
-    // isPassword: true,
+    isPassword: true,
   };
   const totalSteps = 3;
   const [showErr, setShowErr] = useState(false);
@@ -36,7 +37,8 @@ const SignUp = () => {
   const [userData, setUserData] = useState(defaultUserData);
   const [validate, setValidate] = useState(defaultIsValid);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const [userExisted, setUserExisted] = useState(false);
+  const [userNotExisted, setUserNotExisted] = useState(true);
+
   const handlePasswordToggle = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -104,27 +106,44 @@ const SignUp = () => {
       });
     }
   };
-  const handleOnBlur = (e) => {
+  const handleOnBlur = async (e) => {
     const { name, value } = e.target;
     if (name === "Password") {
       validatePasswordToText(value);
     } else {
       validateField(name, value);
+      const checkUserExisted = await callApiCheckEmail(value);
+      if (Number(checkUserExisted.DE) === 0) {
+        setUserNotExisted(true);
+      } else {
+        setUserNotExisted(false);
+      }
     }
+  };
+
+  const callApiCheckEmail = (data) => {
+    return userService.findUsernameOrEmail({
+      emailOrUserName: data,
+    });
   };
 
   const handleOnClick = async (nameBtn) => {
     switch (nameBtn) {
       case "Email": {
         const isValid = validateField("Email", userData.Email);
-        const checkEmailExist = await userService.findUsernameOrEmail({
-          emailOrUserName: userData.Email,
-        });
-        if (isValid && Number(checkEmailExist.DE) === 0) {
-          setCurrentStep(currentStep + 1);
-          setUserExisted(false);
-        } else {
-          setUserExisted(true);
+        if (userData.Email) {
+          try {
+            const checkEmailExisted = await callApiCheckEmail(userData.Email);
+            if (isValid && Number(checkEmailExisted.DE) === 0) {
+              setCurrentStep(currentStep + 1);
+              setUserNotExisted(true);
+            } else {
+              setUserNotExisted(false);
+            }
+          } catch (e) {
+            console.error("Error checking email existence: ", e);
+            throw new Error("Failed to check if email exists.");
+          }
         }
         break;
       }
@@ -141,45 +160,61 @@ const SignUp = () => {
 
       case "BirthDate":
       case "UserAndBirth": {
-        const checkUsernameExist = await userService.findUsernameOrEmail({
-          emailOrUserName: userData.Username,
-        });
-        console.log(checkUsernameExist);
-        const isUsernameValid = validateField("Username", userData.Username);
-        const isBirthDateValid = validateField("BirthDate", userData.BirthDate);
-        if (
-          isUsernameValid &&
-          isBirthDateValid &&
-          Number(checkUsernameExist.DE) === 0
-        ) {
-          setCurrentStep(currentStep + 1);
-          setUserExisted(false);
-        } else {
-          setUserExisted(true);
+        if (userData.Username) {
+          try {
+            const checkUsernameExisted = await callApiCheckEmail(
+              userData.Username
+            );
+            const isUsernameValid = validateField(
+              "Username",
+              userData.Username
+            );
+            const isBirthDateValid = validateField(
+              "BirthDate",
+              userData.BirthDate
+            );
+            if (
+              isUsernameValid &&
+              isBirthDateValid &&
+              Number(checkUsernameExisted.DE) === 0
+            ) {
+              setCurrentStep(currentStep + 1);
+              setUserNotExisted(true);
+            } else {
+              setUserNotExisted(false);
+            }
+          } catch (e) {
+            console.error("Error checking username existence: ", e);
+            throw new Error("Failed to check if username exists.");
+          }
         }
         break;
       }
       case "SignUp": {
-        console.log(isChecked);
         if (!isChecked) {
           setShowErr(true);
         } else {
           setShowErr(false);
-          console.log(userData);
-          const res = await userService.create({
-            email: userData.Email,
-            username: userData.Username,
-            password: userData.Password,
-            birthDate: userData.BirthDate,
-          });
-          console.log(res);
+          try {
+            const res = await userService.create({
+              email: userData.Email,
+              username: userData.Username,
+              password: userData.Password,
+              birthDate: userData.BirthDate,
+            });
+            if (Number(res.DE) === 1) {
+              navigate("/login");
+            }
+          } catch (e) {
+            console.error("Error signing up: ", e);
+            throw new Error("Failed to sign up.");
+          }
         }
       }
     }
   };
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      console.log(e.target.name);
       handleOnClick(e.target.name);
     }
   };
@@ -211,7 +246,7 @@ const SignUp = () => {
                     placeholder="name@domain.com"
                     handleOnchange={handleOnchange}
                     validate={validate}
-                    userExisted={userExisted}
+                    userNotExisted={userNotExisted}
                     handleOnBlur={handleOnBlur}
                     handleKeyDown={handleKeyDown}
                   />
@@ -268,11 +303,14 @@ const SignUp = () => {
                       value={userData.Password}
                       id="Password"
                       label="Password"
+                      validate={validate}
                       type={!passwordVisible ? "password" : "text"}
                       onPasswordToggle={handlePasswordToggle}
                       handleOnchange={handleOnchange}
                       handleOnBlur={handleOnBlur}
                       handleKeyDown={handleKeyDown}
+                      userNotExisted={userNotExisted}
+                      validRequirement={validRequirement}
                     />
                   </div>
                   <div className="sign-form-requirement">
@@ -376,6 +414,7 @@ const SignUp = () => {
                       value={userData.Username}
                       handleOnchange={handleOnchange}
                       validate={validate}
+                      userNotExisted={userNotExisted}
                       handleOnBlur={handleOnBlur}
                       handleKeyDown={handleKeyDown}
                     />
@@ -387,6 +426,7 @@ const SignUp = () => {
                       label="BirthDate"
                       type="date"
                       name="BirthDate"
+                      userNotExisted={userNotExisted}
                       validate={validate}
                       handleOnBlur={handleOnBlur}
                       handleOnchange={handleOnchange}

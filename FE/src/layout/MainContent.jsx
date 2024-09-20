@@ -3,7 +3,6 @@ import "overlayscrollbars/styles/overlayscrollbars.css";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import HomeCard from "../layout/HomeCard";
 import FooterScrollPage from "../components/FooterScrollPage";
-import PropTypes from "prop-types";
 import SearchCard from "./SearchCard";
 
 const MainContent = ({ page }) => {
@@ -20,7 +19,5 @@ const MainContent = ({ page }) => {
     </main>
   );
 };
-MainContent.propTypes = {
-  page: PropTypes.string,
-};
+
 export default MainContent;

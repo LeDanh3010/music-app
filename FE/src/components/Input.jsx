@@ -1,5 +1,4 @@
 import "../scss/components/Input.scss";
-import PropTypes from "prop-types";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { MdErrorOutline } from "react-icons/md";
 
@@ -14,14 +13,27 @@ const Input = (props) => {
     name,
     handleOnchange,
     validate,
-    userExisted,
+    userNotExisted,
     handleOnBlur,
     handleKeyDown,
+    validRequirement,
   } = props;
+  console.log("userNotExisted", userNotExisted);
   const inputClassName = `${
     id === "Email" || id === "Username" || id === "BirthDate"
       ? "form-input textInvalid-space"
       : "form-input"
+  } ${
+    validate?.[`is${id}`] === false || (!userNotExisted && id !== "BirthDate")
+      ? "form-invalid"
+      : ""
+  } ${
+    id === "Password" &&
+    (!validRequirement?.isLength ||
+      !validRequirement?.isNumberOrSpecialChar ||
+      !validRequirement?.isLength)
+      ? "form-invalid"
+      : ""
   }`;
   const renderError = (fieldId) => {
     if (validate?.[`is${fieldId}`] === false) {
@@ -31,7 +43,7 @@ const Input = (props) => {
           {name} is invalid. Please fill the field valid
         </span>
       );
-    } else if (userExisted) {
+    } else if (!userNotExisted && id !== "BirthDate" && id !== "Password") {
       return (
         <span className="validInput">
           <MdErrorOutline />
@@ -41,6 +53,7 @@ const Input = (props) => {
     }
     return null;
   };
+
   return (
     <>
       <label className="form-label" htmlFor={id}>
@@ -70,20 +83,6 @@ const Input = (props) => {
       </div>
     </>
   );
-};
-Input.propTypes = {
-  label: PropTypes.string,
-  type: PropTypes.string,
-  placeholder: PropTypes.string,
-  id: PropTypes.string,
-  name: PropTypes.string,
-  value: PropTypes.string,
-  onPasswordToggle: PropTypes.func,
-  handleOnchange: PropTypes.func,
-  validate: PropTypes.object,
-  handleOnBlur: PropTypes.func,
-  handleKeyDown: PropTypes.func,
-  emailExist: PropTypes.bool,
 };
 
 export default Input;

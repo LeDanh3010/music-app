@@ -19,6 +19,15 @@
       @include abstracts.font(1.4rem, 600);
     }
   }
+  .form-invalid {
+    border: 1px solid red;
+    &:hover {
+      border: 1px solid red !important;
+    }
+    &:focus {
+      outline: none !important;
+    }
+  }
   .textInvalid-space {
     margin-bottom: 30px;
   }

@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import "../scss/components/Button.scss";
 
 const Button = ({ content, handleOnClick, nameBtn }) => {
@@ -13,10 +12,6 @@ const Button = ({ content, handleOnClick, nameBtn }) => {
       {content}
     </button>
   );
-};
-Button.prototypes = {
-  content: PropTypes.string.isRequired,
-  handleOnClick: PropTypes.func,
 };
 
 export default Button;

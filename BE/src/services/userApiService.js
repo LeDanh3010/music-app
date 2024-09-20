@@ -1,5 +1,6 @@
 import { Op } from "sequelize";
 import db from "../models/index.js";
+import bcrypt from "bcryptjs";
 
 class UserApiService {
   // define login
@@ -9,10 +10,19 @@ class UserApiService {
   //define register
   async register(data) {
     try {
-      const user = await db.User.create({
-        data,
+      const hashPassword = async (password) => {
+        const salt = await bcrypt.genSalt(10);
+        return await bcrypt.hash(password, salt);
+      };
+      const hashedPassword = await hashPassword(data.password);
+      await db.User.create({
+        ...data,
+        password: hashedPassword,
       });
-      console.log("user", user);
+      return {
+        message: "Registered successfully",
+        DE: "1",
+      };
     } catch (e) {
       console.error("Error in register:", e);
       return {

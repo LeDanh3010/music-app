@@ -2,7 +2,6 @@ import { IoIosSearch } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import "../scss/layouts/NavHeader.scss";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
 const NavHeader = ({ page }) => {
   return (
@@ -31,7 +30,5 @@ const NavHeader = ({ page }) => {
     </header>
   );
 };
-NavHeader.propTypes = {
-  page: PropTypes.string,
-};
+
 export default NavHeader;
