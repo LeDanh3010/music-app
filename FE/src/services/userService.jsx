@@ -1,8 +1,14 @@
 import axios from "../setup/axiosConfig";
 
 class UserService {
-  login() {
-    axios.post();
+  login(data) {
+    try {
+      return axios.post("/login", data);
+    } catch (e) {
+      return {
+        message: "Some thing wrong in userService",
+      };
+    }
   }
   create(data) {
     try {

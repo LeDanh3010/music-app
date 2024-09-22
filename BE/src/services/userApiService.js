@@ -4,9 +4,33 @@ import bcrypt from "bcryptjs";
 
 class UserApiService {
   // define login
-  login() {
-    console.log("User logged in");
+  async signIn(data) {
+    const user = await db.User.findOne({
+      where: {
+        [Op.or]: [
+          { email: data.emailOrUserName },
+          { username: data.emailOrUserName },
+        ],
+      },
+    });
+    const checkPassword = (rawPass, hashPass) => {
+      return bcrypt.compareSync(rawPass, hashPass);
+    };
+    if (user) {
+      const isPassword = checkPassword(data.password, user.password);
+      if (isPassword) {
+        return {
+          message: "Logged in successfully",
+          DE: "1",
+        };
+      }
+    }
+    return {
+      message: "Invalid email or password",
+      DE: "0",
+    };
   }
+
   //define register
   async register(data) {
     try {

@@ -1,7 +1,7 @@
 @use "../abstracts";
 
 .login-wrapper {
-  background-color: abstracts.$main-background;
+  background-image: linear-gradient(#2a2a2a 50%, #121212 100%);
 }
 .login-content {
   padding: 32px;
@@ -9,12 +9,16 @@
     max-width: 734px;
     width: 100%;
     margin: 0 auto;
-    background-color: abstracts.$secondary-background;
+    background-color: #121212;
     border-radius: 10px;
     .login-brand {
       @include abstracts.flex(null, center, center);
       font-size: 4.1rem;
       padding: 32px 0 24px;
+      img {
+        width: 50px;
+        height: 50px;
+      }
     }
     h1 {
       @include abstracts.font(2.5rem, 700);
@@ -122,4 +126,17 @@
   background-color: abstracts.$secondary-background;
   text-align: center;
   padding: 25px 0;
+}
+
+.showErr {
+  background-color: red;
+  padding: 12px 0 12px 25px;
+  @include abstracts.font(1.3rem, 600);
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  .showErr-icon {
+    font-size: 2.5rem;
+  }
 }

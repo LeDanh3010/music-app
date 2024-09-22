@@ -17,18 +17,27 @@ const Input = (props) => {
     handleOnBlur,
     handleKeyDown,
     validRequirement,
+    typePass,
   } = props;
-  console.log("userNotExisted", userNotExisted);
+
   const inputClassName = `${
-    id === "Email" || id === "Username" || id === "BirthDate"
+    id === "Email" ||
+    id === "Username" ||
+    id === "BirthDate" ||
+    id === "EmailOrUserName"
       ? "form-input textInvalid-space"
       : "form-input"
   } ${
-    validate?.[`is${id}`] === false || (!userNotExisted && id !== "BirthDate")
+    validate?.[`is${id}`] === false ||
+    (!userNotExisted &&
+      id !== "BirthDate" &&
+      id !== "EmailOrUserName" &&
+      !typePass)
       ? "form-invalid"
       : ""
   } ${
     id === "Password" &&
+    !typePass &&
     (!validRequirement?.isLength ||
       !validRequirement?.isNumberOrSpecialChar ||
       !validRequirement?.isLength)
@@ -36,14 +45,23 @@ const Input = (props) => {
       : ""
   }`;
   const renderError = (fieldId) => {
-    if (validate?.[`is${fieldId}`] === false) {
+    if (
+      validate?.[`is${fieldId}`] === false &&
+      id !== "EmailOrUserName" &&
+      !typePass
+    ) {
       return (
         <span className="validInput">
           <MdErrorOutline />
           {name} is invalid. Please fill the field valid
         </span>
       );
-    } else if (!userNotExisted && id !== "BirthDate" && id !== "Password") {
+    } else if (
+      !userNotExisted &&
+      id !== "BirthDate" &&
+      id !== "Password" &&
+      id !== "EmailOrUserName"
+    ) {
       return (
         <span className="validInput">
           <MdErrorOutline />
@@ -67,7 +85,6 @@ const Input = (props) => {
           type={type}
           className={inputClassName}
           placeholder={placeholder}
-          required
           onChange={(e) => handleOnchange(e)}
           onBlur={(e) => handleOnBlur(e)}
           onKeyDown={(e) => handleKeyDown(e)}

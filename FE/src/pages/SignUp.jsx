@@ -1,4 +1,3 @@
-import { FaSpotify } from "react-icons/fa";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import "../scss/pages/Signup.scss";
 import SocialLink from "../components/Social_link.jsx";
@@ -10,6 +9,7 @@ import Button from "../components/Button.jsx";
 import { useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 import { userService } from "../services/userService.jsx";
+import logo from "../assets/spotify-icon.svg";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const letter = /[a-zA-Z]/;
@@ -230,7 +230,7 @@ const SignUp = () => {
           <>
             <header>
               <Link to="/">
-                <FaSpotify />
+                <img className="logo_size" src={logo} alt="Spotify Logo" />
               </Link>
             </header>
             <section>
@@ -258,7 +258,7 @@ const SignUp = () => {
                 </div>
                 <div className="signup-social">
                   <div className="divider-top">or</div>
-                  <SocialLink />
+                  <SocialLink letter="Sign up" />
                   <hr className="divider-bottom" />
                   <p className="signup-bottom">
                     <span>Already have an account?</span>{" "}
@@ -273,7 +273,7 @@ const SignUp = () => {
           <>
             <header>
               <Link to="/">
-                <FaSpotify />
+                <img className="logo_size" src={logo} alt="Spotify Logo" />
               </Link>
             </header>
 
@@ -381,7 +381,7 @@ const SignUp = () => {
           <>
             <header>
               <Link to="/">
-                <FaSpotify />
+                <img className="logo_size" src={logo} alt="Spotify Logo" />
               </Link>
             </header>
 
@@ -447,7 +447,7 @@ const SignUp = () => {
           <>
             <header>
               <Link to="/">
-                <FaSpotify />
+                <img className="logo_size" src={logo} alt="Spotify Logo" />
               </Link>
             </header>
 
