@@ -5,7 +5,7 @@ import { VscThreeBars } from "react-icons/vsc";
 import { FaEarthAmericas } from "react-icons/fa6";
 import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 import "overlayscrollbars/styles/overlayscrollbars.css";
-import "../scss/layouts/sideBar.scss";
+import "../scss/layouts/SideBar.scss";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { CiMusicNote1 } from "react-icons/ci";

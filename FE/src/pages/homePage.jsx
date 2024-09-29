@@ -1,10 +1,8 @@
 import Footer from "../layout/Footer";
 import Header from "../layout/NavHeader";
-import SideBar from "../layout/sideBar";
+import SideBar from "../layout/SideBar";
 import MainContent from "../layout/MainContent";
-
 import "../scss/pages/homePage.scss";
-//import React from "react";
 
 const HomePage = () => {
   return (

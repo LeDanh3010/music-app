@@ -87,7 +87,7 @@ const Login = () => {
     });
     if (isValidSubmit && Number(res.DE) === 1) {
       setError(false);
-      navigate("/");
+      navigate("/user/private");
     } else {
       setError(true);
     }

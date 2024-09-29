@@ -2,18 +2,19 @@ import Footer from "../layout/Footer";
 import Header from "../layout/NavHeader";
 import SideBar from "../layout/SideBar";
 import MainContent from "../layout/MainContent";
+import "../scss/pages/homePage.scss";
 
-const Search = () => {
+const Private = () => {
   return (
     <div className="wrapper">
       <SideBar />
       <div className="main-page">
-        <Header page="search" identify="user" />
-        <MainContent page="search" />
+        <Header page="home" identify="user" />
+        <MainContent page="home" identify="user" />
       </div>
       <Footer />
     </div>
   );
 };
 
-export default Search;
+export default Private;

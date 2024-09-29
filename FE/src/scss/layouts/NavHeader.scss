@@ -12,20 +12,6 @@
   @include abstracts.flex(row, space-between, center);
   flex-wrap: nowrap;
   gap: 8px;
-  // .header-arrow {
-  //   display: flex;
-  //   gap: 8px;
-  //   .header-arrow_icon {
-  //     background-color: rgba(0, 0, 0, 0.7);
-  //     border-radius: 50%;
-  //     border: none;
-  //     width: 32px;
-  //     height: 32px;
-  //     display: inline-flex;
-  //     justify-content: center;
-  //     align-items: center;
-  //   }
-  // }
   .icon {
     color: #fff;
     font-size: 2rem;
@@ -62,6 +48,7 @@
   }
   .header-user {
     @include abstracts.flex(null, space-around, center);
+    position: relative;
     gap: 20px;
     height: 48px;
     margin-left: auto;
@@ -90,6 +77,57 @@
       &:hover {
         transform: scale(1.1);
       }
+    }
+  }
+}
+
+//private
+.header-user {
+  .header-private {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1f1f1f;
+    width: 48px;
+    height: 100%;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+    cursor: pointer;
+    &::before {
+      position: absolute;
+      content: "";
+      inset: 7px;
+      background-color: #b49bc8;
+      border-radius: inherit;
+    }
+    &:hover {
+      transform: scale(1.1);
+    }
+    .header-private-text {
+      color: #000000;
+      z-index: 5;
+      @include abstracts.font(1.5rem, 600);
+    }
+  }
+  .header-private-list {
+    border-radius: 3px;
+    position: absolute;
+    padding: 4px;
+    top: 116%;
+    right: -16px;
+    background-color: abstracts.$third-background;
+    li {
+      width: 150px;
+      height: 42px;
+      padding: 10px;
+    }
+    a {
+      @include abstracts.font(1.4rem, 550);
+    }
+    .divider-line {
+      @include abstracts.divider();
+      margin: 0;
     }
   }
 }

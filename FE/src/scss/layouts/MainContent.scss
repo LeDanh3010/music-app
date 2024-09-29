@@ -9,10 +9,10 @@
   .content-wrapper {
     position: absolute;
     width: 100%;
-    top: -40px;
+    top: 0;
     bottom: 0;
     right: 0;
-    padding: 64px 16px 20px;
+    padding: 15px 16px 20px;
     .os-scrollbar-handle {
       position: relative;
       background-color: abstracts.$scrollbar-color;

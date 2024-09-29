@@ -8,6 +8,7 @@ import HomePage from "./pages/homePage.jsx";
 import Login from "./pages/Login.jsx";
 import PasswordReset from "./pages/PasswordReset.jsx";
 import Search from "./pages/Search.jsx";
+import Private from "./pages/Private.jsx";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
-    path: "/signup",
+    path: "signup",
     element: <SignUp />,
   },
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "search",
     element: <Search />,
+  },
+  {
+    path: "user/private",
+    element: <Private />,
   },
 ]);
 const App = () => {

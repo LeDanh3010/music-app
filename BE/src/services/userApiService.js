@@ -1,11 +1,13 @@
 import { Op } from "sequelize";
 import db from "../models/index.js";
 import bcrypt from "bcryptjs";
+import { configJwt } from "../Jwt/JwtConfig.jsx";
 
 class UserApiService {
   // define login
   async signIn(data) {
     const user = await db.User.findOne({
+      raw: true,
       where: {
         [Op.or]: [
           { email: data.emailOrUserName },
@@ -19,9 +21,21 @@ class UserApiService {
     if (user) {
       const isPassword = checkPassword(data.password, user.password);
       if (isPassword) {
+        const expiresIn = process.env.JWT_EXP;
+        const payload = {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+        };
+        let token = configJwt.createJwt(payload, expiresIn);
         return {
           message: "Logged in successfully",
           DE: "1",
+          DT: {
+            access_token: token,
+            user: user.name,
+            email: user.email,
+          },
         };
       }
     }

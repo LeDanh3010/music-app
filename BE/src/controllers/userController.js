@@ -12,9 +12,17 @@ class UserController {
         });
       }
       const userLoginResult = await userApiService.signIn(req.body);
-      return res
-        .status(200)
-        .json({ message: userLoginResult.message, DE: userLoginResult.DE });
+      if (userLoginResult?.DT?.access_token) {
+        res.cookie("jwt", userLoginResult.DT.access_token, {
+          expires: new Date(Date.now() + 900000), // 15 minutes
+          httpOnly: true,
+        });
+      }
+      return res.status(200).json({
+        message: userLoginResult.message,
+        DE: userLoginResult.DE,
+        DT: userLoginResult.DT,
+      });
     } catch (e) {
       console.log(e);
       return res.status(500).json({
