@@ -59,7 +59,6 @@ const Login = () => {
   };
 
   const validateSubmit = () => {
-    console.log("validateSubmit");
     const newValidate = { ...validate };
     let isValue = true;
     for (let [key, value] of Object.entries(loginData)) {
@@ -81,6 +80,7 @@ const Login = () => {
   const handleOnClick = async (e) => {
     e.preventDefault();
     const isValidSubmit = validateSubmit();
+    console.log(isValidSubmit);
     const res = await userService.login({
       emailOrUserName: loginData.EmailOrUserName,
       password: loginData.Password,
@@ -89,6 +89,7 @@ const Login = () => {
       setError(false);
       navigate("/user/private");
     } else {
+      console.log("error");
       setError(true);
     }
   };

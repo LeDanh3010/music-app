@@ -12,7 +12,6 @@ const NavHeader = ({ page, identify }) => {
     setShowControlUser(!showControlUser);
   };
   const handleClickOutside = (e) => {
-    console.log("dropdownRef.current", dropdownRef.current);
     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
       setShowControlUser(false);
     }

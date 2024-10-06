@@ -12,7 +12,7 @@ const Private = () => {
         <Header page="home" identify="user" />
         <MainContent page="home" identify="user" />
       </div>
-      <Footer />
+      <Footer identify="user" />
     </div>
   );
 };

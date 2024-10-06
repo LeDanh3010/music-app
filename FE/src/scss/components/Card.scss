@@ -2,7 +2,7 @@
 
 .items-wrapper {
   display: grid;
-  grid-template-rows: repeat(2, auto);
+  -template-rows: repeat(2, auto);
   gap: 8px;
 }
 .img-wrapper {
