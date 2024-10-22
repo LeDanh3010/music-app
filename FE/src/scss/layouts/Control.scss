@@ -1,0 +1,59 @@
+@use "../abstracts";
+
+.footer-controls {
+  grid-area: footer;
+  width: 100%;
+  @include abstracts.flex(row, space-between, null);
+  padding: 5px;
+}
+
+//footer left
+.footer-left {
+  @include abstracts.flex(null, null, center);
+  gap: 15px;
+  .footer-left-img {
+    border-radius: 5px;
+  }
+  .footer-info {
+    @include abstracts.flex(column, null, null);
+    gap: 5px;
+  }
+}
+
+//btn style
+%btn-style {
+  background: none;
+  font-size: 2rem;
+  color: #fff;
+  display: flex;
+  cursor: pointer;
+}
+
+//footer center
+.footer-center {
+  @include abstracts.flex(column, null, null);
+  gap: 10px;
+  .footer-btn {
+    @include abstracts.flex(null, center, center);
+    gap: 25px;
+  }
+  .btn {
+    @extend %btn-style;
+  }
+  .btn.play {
+    font-size: 3.5rem;
+  }
+}
+
+//footer right
+.footer-right {
+  @include abstracts.flex(row, center, center);
+  gap: 20px;
+  .btn-volume {
+    @extend %btn-style;
+  }
+  .btn-fullscreen {
+    @extend %btn-style;
+    font-size: 1.5rem;
+  }
+}

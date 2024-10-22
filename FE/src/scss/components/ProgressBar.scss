@@ -1,0 +1,54 @@
+@use "../abstracts";
+
+.progress-bar,
+.progress-bar::-webkit-slider-runnable-track,
+.progress-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border-radius: 5px;
+}
+
+.progress-bar {
+  width: 450px;
+  &::-webkit-slider-runnable-track {
+    height: 4px;
+    background: linear-gradient(to right, #f8f8f8, #f4f7f3),
+      abstracts.$progress-bar;
+    background-size: var(--background-size, 0%) 100%;
+    background-repeat: no-repeat;
+  }
+  &::-webkit-slider-thumb {
+    margin-top: -4px;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
+
+.progress-volume {
+  display: flex;
+}
+.progress-bar.volume {
+  width: 100px;
+  height: fit-content;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.footer-progress {
+  display: flex;
+  gap: 5px;
+  &:hover ::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
+    background-color: #fff;
+  }
+  &:hover ::-webkit-slider-runnable-track {
+    background: linear-gradient(to right, #15a02c, #0ee919),
+      abstracts.$progress-bar;
+    background-size: var(--background-size, 0%) 100%;
+    background-repeat: no-repeat;
+  }
+}
