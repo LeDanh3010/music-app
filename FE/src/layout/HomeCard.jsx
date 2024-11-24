@@ -29,6 +29,11 @@ const HomeCard = () => {
         type: "Artist",
         image_url: "https://via.placeholder.com/130",
       },
+      {
+        name: "Yanbi",
+        type: "Artist",
+        image_url: "https://via.placeholder.com/130",
+      },
       // {
       //   id: 7,
       //   name: "Aimyon",
@@ -74,6 +79,11 @@ const HomeCard = () => {
         artist: "ILLIT",
         image_url: "https://via.placeholder.com/130",
       },
+      {
+        musicName: "REAL ME",
+        artist: "ranbi",
+        image_url: "https://via.placeholder.com/130",
+      },
       // {
       //   id: 18,
       //   musicName: "I wonder",
@@ -116,6 +126,11 @@ const HomeCard = () => {
       },
       {
         name: "YOASOBI",
+        type: "Artist",
+        image_url: "https://via.placeholder.com/130",
+      },
+      {
+        name: "YO",
         type: "Artist",
         image_url: "https://via.placeholder.com/130",
       },

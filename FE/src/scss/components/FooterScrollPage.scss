@@ -27,7 +27,8 @@
   }
   .footer-social {
     ul {
-      @include abstracts.flex(null, space-around, center);
+      @include abstracts.flex(null, flex-end, center);
+      gap: 15px;
     }
     .social {
       margin-top: 0;

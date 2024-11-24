@@ -1,42 +1,44 @@
 import { useEffect, useRef } from "react";
 import "../scss/components/ProgressBar.scss";
+import { memo } from "react";
 
 const ProgressBar = ({
   typeBar,
-  min,
-  max,
-  handleVolumechange,
-  handleProgressBar,
-  step,
+  min = 0,
+  max = 100,
+  onVolumechange,
+  onProgressBar,
+  step = 1,
   value,
 }) => {
+  // console.log("progress bar render");
+  // console.log("ProgressBar props:", { value, max });
   const inputRef = useRef(null);
-
   useEffect(() => {
+    const setBackgroundSize = () => {
+      if (inputRef.current) {
+        const input = inputRef.current;
+        const minValue = +input.min || 0;
+        const maxValue = +input.max;
+        const currentValue = +input.value;
+        const backgroundSize =
+          maxValue === minValue
+            ? 0
+            : ((currentValue - minValue) / (maxValue - minValue)) * 100;
+        input.style.setProperty("--background-size", `${backgroundSize}%`);
+      }
+    };
+
+    setBackgroundSize();
     const input = inputRef.current;
     if (!input) return;
-    const setBackgroundSize = (input) => {
-      input.style.setProperty(
-        "--background-size",
-        `${getBackgroundSize(input)}%`
-      );
-    };
 
-    const getBackgroundSize = (input) => {
-      const min = +input.min || 0;
-      const max = +input.max;
-      const value = +input.value;
-      if (max === min) {
-        return 0;
-      }
-      return ((value - min) / (max - min)) * 100;
-    };
-    setBackgroundSize(input);
-    input.addEventListener("input", () => setBackgroundSize(input));
+    input.addEventListener("input", setBackgroundSize);
     return () => {
-      input.removeEventListener("input", () => setBackgroundSize(input));
+      input.removeEventListener("input", setBackgroundSize);
     };
-  });
+  }, [value]);
+
   return (
     <input
       type="range"
@@ -45,12 +47,11 @@ const ProgressBar = ({
       max={max}
       ref={inputRef}
       step={step}
-      onChange={
-        typeBar ? (e) => handleVolumechange(e) : (e) => handleProgressBar(e)
-      }
+      onChange={typeBar ? onVolumechange : onProgressBar}
       value={value}
+      style={{ "--background-size": `${(value / max) * 100}%` }}
     />
   );
 };
 
-export default ProgressBar;
+export default memo(ProgressBar);

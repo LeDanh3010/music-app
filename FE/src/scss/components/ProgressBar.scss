@@ -1,5 +1,6 @@
 @use "../abstracts";
 
+// style general progressbar
 .progress-bar,
 .progress-bar::-webkit-slider-runnable-track,
 .progress-bar::-webkit-slider-thumb {
@@ -9,6 +10,7 @@
 
 .progress-bar {
   width: 450px;
+  height: fit-content;
   &::-webkit-slider-runnable-track {
     height: 4px;
     background: linear-gradient(to right, #f8f8f8, #f4f7f3),
@@ -26,20 +28,31 @@
   }
 }
 
-.progress-volume {
+.progress-track {
   display: flex;
-}
-.progress-bar.volume {
-  width: 100px;
-  height: fit-content;
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  align-items: center;
 }
 
-.footer-progress {
+// progress volume
+.progress-bar.volume {
+  width: 100px;
+}
+
+//progress primary
+.progress-wrapper {
   display: flex;
-  gap: 5px;
+  .progress-duration {
+    @include abstracts.font(1.2rem, 600);
+    min-width: 40px;
+    &.left {
+      margin-right: 10px;
+      text-align: right;
+    }
+    &.right {
+      margin-left: 10px;
+      text-align: left;
+    }
+  }
   &:hover ::-webkit-slider-thumb {
     width: 12px;
     height: 12px;

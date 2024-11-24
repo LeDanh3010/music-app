@@ -24,7 +24,6 @@
 %btn-style {
   background: none;
   font-size: 2rem;
-  color: #fff;
   display: flex;
   cursor: pointer;
 }
@@ -32,7 +31,7 @@
 //footer center
 .footer-center {
   @include abstracts.flex(column, null, null);
-  gap: 10px;
+  gap: 5px;
   .footer-btn {
     @include abstracts.flex(null, center, center);
     gap: 25px;
@@ -42,6 +41,28 @@
   }
   .btn.play {
     font-size: 3.5rem;
+    color: #fff;
+    padding: 2px;
+  }
+  .btn.skip,
+  .btn.repeat,
+  .btn.shuffle {
+    position: relative;
+    color: #fff;
+    padding: 6px;
+    border-radius: 50%;
+    &:hover::before {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      inset: 0;
+      background-color: abstracts.$progress-bar;
+      opacity: 0.2;
+    }
+  }
+  .btn.repeat,
+  .btn.shuffle {
+    color: abstracts.$progress-bar;
   }
 }
 
@@ -49,11 +70,15 @@
 .footer-right {
   @include abstracts.flex(row, center, center);
   gap: 20px;
-  .btn-volume {
+  .btn-volume,
+  .btn-fullscreen {
+    color: #fff;
     @extend %btn-style;
   }
   .btn-fullscreen {
-    @extend %btn-style;
     font-size: 1.5rem;
+  }
+  .btn-volume {
+    margin-right: 8px;
   }
 }
