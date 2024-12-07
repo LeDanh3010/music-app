@@ -13,7 +13,7 @@ import { FaPlus } from "react-icons/fa";
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
-const SideBar = () => {
+const SideBar = ({ identify }) => {
   const [visible, setVisible] = useState(null);
   let location = useLocation();
   const currentPath = location.pathname;
@@ -37,24 +37,46 @@ const SideBar = () => {
           </div>
           <ul className="sidebar-header">
             <li className="sidebar-home">
-              <NavLink to="/" aria-label="Home">
-                {currentPath === "/" ? (
-                  <GoHomeFill className="sidebar-icon" />
-                ) : (
-                  <GoHome className="sidebar-icon" />
-                )}
-                Home
-              </NavLink>
+              {identify ? (
+                <NavLink to="/user/home" aria-label="Home">
+                  {currentPath === "/user/home" ? (
+                    <GoHomeFill className="sidebar-icon" />
+                  ) : (
+                    <GoHome className="sidebar-icon" />
+                  )}
+                  Home
+                </NavLink>
+              ) : (
+                <NavLink to="/" aria-label="Home">
+                  {currentPath === "/" ? (
+                    <GoHomeFill className="sidebar-icon" />
+                  ) : (
+                    <GoHome className="sidebar-icon" />
+                  )}
+                  Home
+                </NavLink>
+              )}
             </li>
             <li className="sidebar-search">
-              <NavLink to="/search" aria-label="Search">
-                {currentPath === "/search" ? (
-                  <BiSolidSearch className="sidebar-icon" />
-                ) : (
-                  <BiSearch className="sidebar-icon" />
-                )}
-                Search
-              </NavLink>
+              {identify ? (
+                <NavLink to="/user/search" aria-label="Search">
+                  {currentPath === "/user/search" ? (
+                    <BiSolidSearch className="sidebar-icon" />
+                  ) : (
+                    <BiSearch className="sidebar-icon" />
+                  )}
+                  Search
+                </NavLink>
+              ) : (
+                <NavLink to="/search" aria-label="Search">
+                  {currentPath === "/search" ? (
+                    <BiSolidSearch className="sidebar-icon" />
+                  ) : (
+                    <BiSearch className="sidebar-icon" />
+                  )}
+                  Search
+                </NavLink>
+              )}
             </li>
           </ul>
         </div>
@@ -146,53 +168,55 @@ const SideBar = () => {
                 </button>
               </div>
             </OverlayScrollbarsComponent>
-            <div className="sidebar-footer">
-              <div className="privacy-policy">
-                <div className="privacy-policy-top">
-                  <span>
-                    <a href="#" aria-label="Legal">
-                      Legal
-                    </a>
-                  </span>
-                  <span>
-                    <a href="#" aria-label="Safety & Privacy Center">
-                      Safety & Privacy Center
-                    </a>
-                  </span>
-                  <span>
-                    <a href="#" aria-label="Privacy Policy">
-                      Privacy Policy
-                    </a>
-                  </span>
+            {!identify && (
+              <div className="sidebar-footer">
+                <div className="privacy-policy">
+                  <div className="privacy-policy-top">
+                    <span>
+                      <a href="#" aria-label="Legal">
+                        Legal
+                      </a>
+                    </span>
+                    <span>
+                      <a href="#" aria-label="Safety & Privacy Center">
+                        Safety & Privacy Center
+                      </a>
+                    </span>
+                    <span>
+                      <a href="#" aria-label="Privacy Policy">
+                        Privacy Policy
+                      </a>
+                    </span>
+                    <span>
+                      <a href="#" aria-label="Cookies">
+                        Cookies
+                      </a>
+                    </span>
+                    <span>
+                      <a href="#" aria-label="About Ads">
+                        About Ads
+                      </a>
+                    </span>
+                    <span>
+                      <a href="#" aria-label="Accessibility">
+                        Accessibility
+                      </a>
+                    </span>
+                  </div>
                   <span>
                     <a href="#" aria-label="Cookies">
                       Cookies
                     </a>
                   </span>
-                  <span>
-                    <a href="#" aria-label="About Ads">
-                      About Ads
-                    </a>
-                  </span>
-                  <span>
-                    <a href="#" aria-label="Accessibility">
-                      Accessibility
-                    </a>
-                  </span>
                 </div>
-                <span>
-                  <a href="#" aria-label="Cookies">
-                    Cookies
-                  </a>
-                </span>
+                <div className="btn-footer">
+                  <button className="btn btn-language">
+                    <FaEarthAmericas />
+                    <span>English</span>
+                  </button>
+                </div>
               </div>
-              <div className="btn-footer">
-                <button className="btn btn-language">
-                  <FaEarthAmericas />
-                  <span>English</span>
-                </button>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

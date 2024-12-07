@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import Button from "../components/Button.jsx";
 import { useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
-import { userService } from "../services/userService.jsx";
+import { useUserService } from "../services/userService.jsx";
 import logo from "../assets/spotify-icon.svg";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,6 +16,7 @@ const letter = /[a-zA-Z]/;
 const numberOrSpecialChar = /[0-9!@#$%^&*]/;
 
 const SignUp = () => {
+  const userService = useUserService();
   const navigate = useNavigate();
   const defaultUserData = {
     Email: "",

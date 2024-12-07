@@ -1,9 +1,12 @@
-import axios from "../setup/axiosConfig";
+import useAxios from "../setup/axiosConfig";
 
 class UserService {
+  constructor(axiosInstance) {
+    this.axios = axiosInstance;
+  }
   login(data) {
     try {
-      return axios.post("/login", data);
+      return this.axios.post("/login", data);
     } catch (e) {
       return {
         message: "Some thing wrong in userService",
@@ -12,7 +15,7 @@ class UserService {
   }
   create(data) {
     try {
-      return axios.post("/register", data);
+      return this.axios.post("/register", data);
     } catch (e) {
       return {
         message: "Some thing wrong in userService",
@@ -21,7 +24,7 @@ class UserService {
   }
   findUsernameOrEmail(emailOrUserName) {
     try {
-      return axios.post("/checkUser", emailOrUserName);
+      return this.axios.post("/checkUser", emailOrUserName);
     } catch (e) {
       return {
         message: "Some thing wrong in userService",
@@ -29,4 +32,7 @@ class UserService {
     }
   }
 }
-export const userService = new UserService();
+export const useUserService = () => {
+  const axiosInstance = useAxios();
+  return new UserService(axiosInstance);
+};

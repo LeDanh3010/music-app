@@ -2,14 +2,17 @@ import "../scss/pages/Login.scss";
 import SocialLink from "../components/Social_link";
 import Input from "../components/Input";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import FooterPrivacyPolicy from "../components/FooterPrivacyPolicy";
 import Button from "../components/Button";
 import logo from "../assets/spotify-icon.svg";
 import { MdErrorOutline } from "react-icons/md";
-import { userService } from "../services/userService";
+import { useUserService } from "../services/userService";
+import { AuthContext } from "../components/AuthContext";
 
 const Login = () => {
+  const userService = useUserService();
+  const { setAccessToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -80,14 +83,14 @@ const Login = () => {
   const handleOnClick = async (e) => {
     e.preventDefault();
     const isValidSubmit = validateSubmit();
-    console.log(isValidSubmit);
     const res = await userService.login({
       emailOrUserName: loginData.EmailOrUserName,
       password: loginData.Password,
     });
     if (isValidSubmit && Number(res.DE) === 1) {
+      setAccessToken(res.DT.access_token);
       setError(false);
-      navigate("/user/private");
+      navigate("/user/home");
     } else {
       console.log("error");
       setError(true);
@@ -96,7 +99,7 @@ const Login = () => {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      handleOnClick();
+      handleOnClick;
     }
   };
   return (

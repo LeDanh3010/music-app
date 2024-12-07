@@ -31,11 +31,10 @@ const tracks = [
 ];
 
 const Control = () => {
-  console.log("control");
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMute, setIsMute] = useState(false);
   const [volume, setVolume] = useState(1);
-  const [showMusicName, setShowMusicName] = useState(true);
+  const [showMusicName, setShowMusicName] = useState(false);
   const [trackProgress, setTrackProgress] = useState(0);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const audioRef = useRef(new Audio(tracks[currentTrackIndex].src));
@@ -143,7 +142,6 @@ const Control = () => {
   }, [currentTrackIndex]);
 
   useEffect(() => {
-    console.log("use effect end");
     const audio = audioRef.current;
 
     const onTrackEnd = () => {

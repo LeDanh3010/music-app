@@ -4,10 +4,10 @@ import SideBar from "../layout/SideBar";
 import MainContent from "../layout/MainContent";
 import "../scss/pages/homePage.scss";
 
-const Private = () => {
+const HomePrivate = () => {
   return (
     <div className="wrapper">
-      <SideBar />
+      <SideBar identify="user" />
       <div className="main-page">
         <Header page="home" identify="user" />
         <MainContent page="home" identify="user" />
@@ -17,4 +17,4 @@ const Private = () => {
   );
 };
 
-export default Private;
+export default HomePrivate;
