@@ -2,8 +2,7 @@ import jwt from "jsonwebtoken";
 require("dotenv").config();
 
 class ConfigJwt {
-  createJwt(payload, expiresIn) {
-    const key = process.env.JWT_KEY;
+  createJwt(payload, key, expiresIn) {
     let token = null;
     const options = { expiresIn };
     try {

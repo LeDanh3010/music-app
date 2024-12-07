@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import routes from "./routes/index.js";
 import connectDatabase from "./config/DB.js";
 import Cors from "./config/CORS.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -12,15 +13,18 @@ const app = express();
 //define port
 const PORT = process.env.PORT || 8360;
 
+//Cors
+Cors(app);
+
 // parse application/x-www-form-urlencoded
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Cookie parser
+app.use(cookieParser());
+
 //connect database
 connectDatabase();
-
-//Cors
-Cors(app);
 
 //define routes
 routes(app);

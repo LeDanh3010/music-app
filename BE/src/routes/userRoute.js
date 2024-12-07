@@ -1,9 +1,10 @@
 import express from "express";
 import { userController } from "../controllers/userController.js";
+import CheckUserToken from "../middleware/CheckUserToken.js";
 
 const api = express.Router();
-
-// Home route
+//middleware check token
+api.all("*", CheckUserToken);
 
 //Site Page
 api.post("/login", userController.login);

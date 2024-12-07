@@ -12,16 +12,19 @@ class UserController {
         });
       }
       const userLoginResult = await userApiService.signIn(req.body);
-      if (userLoginResult?.DT?.access_token) {
-        res.cookie("jwt", userLoginResult.DT.access_token, {
-          expires: new Date(Date.now() + 900000), // 15 minutes
+      if (userLoginResult?.DT?.refresh_token) {
+        res.cookie("refresh_token", userLoginResult.DT.refresh_token, {
           httpOnly: true,
         });
       }
       return res.status(200).json({
         message: userLoginResult.message,
         DE: userLoginResult.DE,
-        DT: userLoginResult.DT,
+        DT: {
+          access_token: userLoginResult?.DT?.access_token,
+          user: userLoginResult?.DT?.user,
+          email: userLoginResult?.DT?.email,
+        },
       });
     } catch (e) {
       console.log(e);

@@ -21,19 +21,28 @@ class UserApiService {
     if (user) {
       const isPassword = checkPassword(data.password, user.password);
       if (isPassword) {
-        const expiresIn = process.env.JWT_EXP;
         const payload = {
           id: user.id,
-          name: user.name,
+          name: user.username,
           email: user.email,
         };
-        let token = configJwt.createJwt(payload, expiresIn);
+        const accessToken = configJwt.createJwt(
+          payload,
+          process.env.ACCESS_KEY,
+          process.env.ACCESS_TOKEN_EXP
+        );
+        const refreshToken = configJwt.createJwt(
+          payload,
+          process.env.REFRESH_KEY,
+          process.env.REFRESH_TOKEN_EXP
+        );
         return {
           message: "Logged in successfully",
           DE: "1",
           DT: {
-            access_token: token,
-            user: user.name,
+            access_token: accessToken,
+            refresh_token: refreshToken,
+            user: user.username,
             email: user.email,
           },
         };
