@@ -10,8 +10,20 @@ import { IoVolumeHigh } from "react-icons/io5";
 import { IoMdVolumeMute } from "react-icons/io";
 import { BsFullscreen } from "react-icons/bs";
 import { RiRepeatOneFill } from "react-icons/ri";
+import { CgProfile } from "react-icons/cg";
+import { TiThMenu } from "react-icons/ti";
+import { IoIosNotifications } from "react-icons/io";
+import { IoIosSettings } from "react-icons/io";
+import { TbReportAnalytics } from "react-icons/tb";
+import { MdLogout } from "react-icons/md";
 
 export {
+  CgProfile,
+  TiThMenu,
+  IoIosNotifications,
+  IoIosSettings,
+  TbReportAnalytics,
+  MdLogout,
   FaPlayCircle,
   FaCirclePause,
   IoPlaySkipForwardSharp,

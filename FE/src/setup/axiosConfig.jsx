@@ -6,7 +6,7 @@ const useAxios = () => {
   const { accessToken } = useContext(AuthContext);
   // Set config defaults when creating the instance
   const instance = axios.create({
-    baseURL: "http://localhost:8360/user",
+    baseURL: "http://localhost:8360/",
   });
 
   //to set cookie

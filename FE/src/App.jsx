@@ -10,6 +10,7 @@ import PasswordReset from "./pages/PasswordReset.jsx";
 import Search from "./pages/Search.jsx";
 import HomePrivate from "./pages/HomePrivate.jsx";
 import SearchPrivate from "./pages/SearchPrivate.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "user/search",
     element: <SearchPrivate />,
+  },
+  {
+    path: "admin",
+    element: <Dashboard />,
   },
 ]);
 const App = () => {

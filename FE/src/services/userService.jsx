@@ -6,7 +6,7 @@ class UserService {
   }
   login(data) {
     try {
-      return this.axios.post("/login", data);
+      return this.axios.post("/user/login", data);
     } catch (e) {
       return {
         message: "Some thing wrong in userService",
@@ -15,7 +15,7 @@ class UserService {
   }
   create(data) {
     try {
-      return this.axios.post("/register", data);
+      return this.axios.post("/user/register", data);
     } catch (e) {
       return {
         message: "Some thing wrong in userService",
@@ -24,7 +24,7 @@ class UserService {
   }
   findUsernameOrEmail(emailOrUserName) {
     try {
-      return this.axios.post("/checkUser", emailOrUserName);
+      return this.axios.post("/user/checkUser", emailOrUserName);
     } catch (e) {
       return {
         message: "Some thing wrong in userService",

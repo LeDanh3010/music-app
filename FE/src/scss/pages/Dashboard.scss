@@ -1,0 +1,130 @@
+@use "../abstracts";
+
+.dashboard-container {
+  background-color: #000;
+  height: 100dvh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  .hero {
+    padding: 20px 30px;
+    display: flex;
+    background-color: #121212;
+  }
+  .top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .logo-content {
+    font-size: 1.4rem;
+  }
+  .logo-left,
+  .logo-right {
+    font-size: 2.5rem;
+  }
+  .logo-left {
+    cursor: pointer;
+  }
+  .message {
+    margin-left: auto;
+    font-weight: 600;
+    font-size: 1.2rem;
+    .admin {
+      background-color: abstracts.$button-color;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  }
+}
+
+//main container
+
+.main-container {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+  .sidebar-container {
+    display: flex;
+    padding-top: 20px;
+    padding-left: 15px;
+    padding-bottom: 20px;
+  }
+  .sidebar-nav {
+    background-color: #121212;
+    padding: 30px 15px;
+    border-radius: 15px;
+  }
+  .sidebar_expand {
+    width: 220px;
+  }
+  .sidebar-option {
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .sidebar-option + .sidebar-option {
+    margin-top: 30px;
+  }
+  .icon-option {
+    font-size: 2.5rem;
+    color: abstracts.$button-color;
+    transition: color 0.2s linear;
+  }
+  .icon-option:hover {
+    color: #b0f185;
+  }
+  .text-option {
+    transition: color 0.2s linear;
+  }
+  .text-option:hover {
+    color: #a6adbb;
+  }
+
+  //list container
+  .list-container {
+    width: 100%;
+    padding: 20px 15px 20px 0;
+    .list-content {
+      height: 100%;
+      background-color: #121212;
+      border-radius: 15px;
+      padding: 25px 25px;
+    }
+    .list-users {
+      font-size: 2.8rem;
+      padding-bottom: 30px;
+    }
+    .list-items {
+      display: grid;
+      gap: 1px;
+    }
+    .list-header,
+    .list-row {
+      display: grid;
+      grid-template-columns: minmax(auto, 100px) repeat(4, 1fr);
+      gap: 1px;
+    }
+    .list-header {
+      .list-cell.title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 15px;
+      }
+    }
+    .list-cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+      padding: 10px;
+      background-image: linear-gradient(to right, #1f1f1f, #282828);
+    }
+  }
+}
