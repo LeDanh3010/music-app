@@ -1,21 +1,14 @@
 import useAxios from "../setup/axiosConfig";
 
-class AdminService {
+class AdminApiService {
   constructor(axiosInstance) {
     this.axios = axiosInstance;
   }
   getUser() {
-    try {
-      return this.axios.get("/admin/getUser");
-    } catch (e) {
-      console.log(e);
-      return {
-        message: "Some thing wrong in adminService",
-      };
-    }
+    return this.axios.get("/admin/getUser");
   }
 }
-export const useAdminService = () => {
+export const useAdminApiService = () => {
   const axiosInstance = useAxios();
-  return new AdminService(axiosInstance);
+  return new AdminApiService(axiosInstance);
 };

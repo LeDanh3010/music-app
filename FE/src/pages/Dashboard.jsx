@@ -9,10 +9,12 @@ import {
   MdLogout,
 } from "../icons/Icon";
 import SidebarOption from "../components/SidebarOption";
-import { useAdminService } from "../services/adminService";
+import { useAdminApiService } from "../services/adminService";
 
 const Dashboard = () => {
   const [navShrink, setNavShrink] = useState(true);
+  const adminApiService = useAdminApiService();
+  const [users, setUsers] = useState([]);
 
   const toggleNavShrink = () => {
     setNavShrink(!navShrink);
@@ -20,8 +22,8 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await useAdminService.getUser();
-        console.log("response", response);
+        const response = await adminApiService.getUser();
+        +response?.DE === 1 && setUsers(response.data);
       } catch (e) {
         console.error("Error get user ", e);
         throw new Error("failed to get user");
@@ -82,17 +84,20 @@ const Dashboard = () => {
                 <div className="list-cell title ">ID</div>
                 <div className="list-cell title">Username</div>
                 <div className="list-cell title">Email</div>
-                <div className="list-cell title">Phone Number</div>
-                <div className="list-cell title">Address</div>
+                <div className="list-cell title">Birth Date</div>
+                <div className="list-cell title">Create At</div>
               </div>
-
-              <div className="list-row">
-                <div className="list-cell">1</div>
-                <div className="list-cell">John Doe</div>
-                <div className="list-cell">johndoe@example.com</div>
-                <div className="list-cell">012345621</div>
-                <div className="list-cell">San Francisco</div>
-              </div>
+              {users?.map((user) => {
+                return (
+                  <div className="list-row" key={user.id}>
+                    <div className="list-cell">{user.id}</div>
+                    <div className="list-cell">{user.username}</div>
+                    <div className="list-cell">{user.email}</div>
+                    <div className="list-cell">{user.birthDate}</div>
+                    <div className="list-cell">{user.createdAt}</div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

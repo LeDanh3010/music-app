@@ -87,7 +87,7 @@ const Login = () => {
       emailOrUserName: loginData.EmailOrUserName,
       password: loginData.Password,
     });
-    if (isValidSubmit && Number(res.DE) === 1) {
+    if (isValidSubmit && Number(res?.DE) === 1) {
       setAccessToken(res.DT.access_token);
       setError(false);
       navigate("/user/home");

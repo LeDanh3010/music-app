@@ -5,31 +5,15 @@ class UserService {
     this.axios = axiosInstance;
   }
   login(data) {
-    try {
-      return this.axios.post("/user/login", data);
-    } catch (e) {
-      return {
-        message: "Some thing wrong in userService",
-      };
-    }
+    return this.axios.post("/user/login", data);
   }
+
   create(data) {
-    try {
-      return this.axios.post("/user/register", data);
-    } catch (e) {
-      return {
-        message: "Some thing wrong in userService",
-      };
-    }
+    return this.axios.post("/user/register", data);
   }
+
   findUsernameOrEmail(emailOrUserName) {
-    try {
-      return this.axios.post("/user/checkUser", emailOrUserName);
-    } catch (e) {
-      return {
-        message: "Some thing wrong in userService",
-      };
-    }
+    return this.axios.post("/user/checkUser", emailOrUserName);
   }
 }
 export const useUserService = () => {

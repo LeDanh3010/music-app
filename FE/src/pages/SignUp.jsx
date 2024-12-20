@@ -203,7 +203,7 @@ const SignUp = () => {
               password: userData.Password,
               birthDate: userData.BirthDate,
             });
-            if (Number(res.DE) === 1) {
+            if (Number(res?.DE) === 1) {
               navigate("/login");
             }
           } catch (e) {
