@@ -5,7 +5,7 @@ import { adminController } from "../controllers/adminController.js";
 
 const api = express.Router();
 //middleware check token
-api.all("*", CheckUserToken);
+// api.all("*", CheckUserToken);
 
 //Site Page
 api.post("/login", userController.login);
@@ -16,4 +16,5 @@ api.post("/checkUser", userController.checkUser);
 
 //for admin
 api.get("/getUser", adminController.getUser);
+
 export default api;
